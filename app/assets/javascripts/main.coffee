@@ -300,7 +300,7 @@ window.Player =
     return block.move dir
 
 window.Map =
-  level: ""
+  level: "ME1"
   tile_size: 40
   tiles: []
   markers: []
