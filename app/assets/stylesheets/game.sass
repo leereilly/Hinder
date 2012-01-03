@@ -1,0 +1,42 @@
+body
+  background-color: #333
+  color:  #FFF
+  margin: 0
+  padding: 0
+  text-align: center
+  
+#viewfield, #shadow_overlay, #wall_shadows, #object_shadows, #markers, #darkness, #player
+  position: absolute
+  top: 0px
+  left: 0px
+  
+#markers
+  z-index: 3
+  background: url('textures/floor.png')
+
+#wall_shadows
+  z-index: 4
+  left: 1px
+  
+#object_shadows
+  z-index: 5
+  left: 1px
+#viewfield
+  border:  1px solid #333
+  z-index: 6
+#player
+  z-index: 7
+#shadow_overlay
+  z-index: 8 
+#darkness
+  z-index: 9  
+#container
+  display: block
+  position: relative
+  width: 100%
+  max-width: 600px
+  margin:  0 auto
+  
+canvas 
+  width: 100%
+  height: auto
