@@ -459,6 +459,7 @@ Game =
     #console.log "Placed blocks: #{placed_blocks} / #{Map.markers.length}"
     if placed_blocks == Map.markers.length
       Map.complete = true
+      Player.unlock()
       #console.log "Done"
       for hole in Map.holes
         Map.tiles[hole.y][hole.x] = 7
