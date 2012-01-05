@@ -61,10 +61,14 @@ class Enemy
   init: ->
     console.log "Enemy loaded"
     @canvas = Render.canvases.main
-    @texture = Resource.images.enemy.obj
+    if @type == "enemy"
+      @texture = Resource.images.enemy.obj
+    if @type == "rescue"
+      @texture = Resource.images.rescue.obj
+    
     Render.object @
     
-  constructor: (@x, @y, @moving) ->
+  constructor: (@x, @y, @moving, @type = "enemy") ->
     @oldX = @x
     @oldY = @y
     @old_direction = "right"
@@ -81,7 +85,6 @@ class Enemy
         if @collision @old_direction
           @dir = @old_direction
         else
-          #console.log "Change dir"
           @dir = "up" if @old_direction == "right"
           @dir = "left" if @old_direction == "up"
           @dir = "down" if @old_direction == "left"
@@ -144,39 +147,30 @@ class Enemy
     @distX = @x - Player.x
     if @distY > 0 && @distX > 0
       if @distY > @distX
-        @states[0] = "up"
-        @states[1] = "left"
+        @states = ["up", "left"]
       if @distX > @distY
-        @states[0] = "left"
-        @states[1] = "up"
+        @states = ["left", "up"]
     else
       if @distY > 0
-        @states[0] = "up"
-        @states[1] = "right"
+        @states = ["up", "right"]
       if @distX > 0
-        @states[0] = "left"
-        @states[1] = "down"        
+        @states = ["left", "down"]        
     if @distY < 0 && @distX < 0
         if @distY < @distX
-            @states[0] = "down"
-            @states[1] = "right"
+            @states = ["down", "right"] 
         if @distX < @distY
-            @states[0] = "right"
-            @states[1] = "down"
+            @states = ["right", "down"] 
     else
       if @distY < 0
-        @states[0] = "down"
-        @states[1] = "left"
+        @states = ["down", "left"] 
       if @distX < 0
-        @states[0] = "right"
-        @states[1] = "up"
-
+        @states = ["right", "up"]
     @move(@states[0])    
     return
     
   move: (dir) ->
     @dir = dir
-    #console.log "Enemy X:#{@distX} Y:#{@distY} state1:#{@states[0]} state2:#{@states[1]} movestate#{@movestate}"
+
     if @collision @dir
       @movecount = 0
       @oldX = @x
@@ -189,9 +183,6 @@ class Enemy
       
       @animate()
       Map.tiles[@oldY][@oldX] = 0
-      #@old_direction = @dir
-      #@dir = "none"
-      #Render.object @ 
       Map.tiles[@y][@x] = 4
     else
       if @collision @states[1]
@@ -200,8 +191,7 @@ class Enemy
     
   animate: ->
     if @movecount < Map.tile_size - 10
-      @movecount += 5
-      #@movecount = ~~ (@movecount+0.5); 
+      @movecount += 5 
       requestAnimFrame(=> @animate())      
     else
       @old_direction = @dir
@@ -210,9 +200,17 @@ class Enemy
     Render.object @ 
     return
   collision: (dir) ->
+    if @x > 13
+      Map.tiles[@y][@x] = 0
+      Render.clearCanvas(@canvas, @x*Map.tile_size, @y*Map.tile_size, Map.tile_size, Map.tile_size)
+      @type = "none"
+      @x = 1
+      @y = 1
+    
     map_block = Map.next_block(@x, @y, dir)
  
     return true if map_block.type == 0
+
     return false if (map_block.type != 2 && map_block.type != 5)
     block = new Block(map_block.x, map_block.y, map_block.type)
     return block.move dir
@@ -258,6 +256,7 @@ window.Player =
       return
     if (@x == 14 && @dir == "right" && Map.exit.right != "")
       Map.level = Map.exit.right
+      @locked = false
       Game.nextLevel()
       return
 
@@ -370,6 +369,7 @@ Game =
       Map.exit = mapdata.exit
       for row, y in Map.tiles
         for block, x in row
+          
           if block == 1
             Render.object {"type": "block", "typeid": block, "canvas": Render.canvases.main, "x": x, "y": y, "texture": Render.walls[Math.floor(Math.random() * Render.walls.length)].obj, "shadow": Resource.images.wall_shadow.obj}
           if block == 2
@@ -390,6 +390,9 @@ Game =
             Map.tiles[y][x] = 0
           if block == 6
             Map.enemies[Map.enemies.length] = new Enemy(x,y,true)
+            Map.tiles[y][x] = 0
+          if block == 10
+            Map.enemies[Map.enemies.length] = new Enemy(x,y,true, "rescue")
             Map.tiles[y][x] = 0
           if block == 9
             Map.markers[Map.markers.length] = new Marker(x,y)
@@ -446,11 +449,7 @@ Game =
   cycle: ->
     Player.locked = true
     placed_blocks = 0
-    console.log Map.enemies.length
-
-    @move_enemy(Map.enemies.length)
-    #for enemy in Map.enemies
-      #enemy.maketurn 0
+    @move_enemy(Map.enemies.length) if Map.enemies.length > 0
       
     for marker in Map.markers
       marker.checkblock()
@@ -459,7 +458,6 @@ Game =
     #console.log "Placed blocks: #{placed_blocks} / #{Map.markers.length}"
     if placed_blocks == Map.markers.length
       Map.complete = true
-      Player.unlock()
       #console.log "Done"
       for hole in Map.holes
         Map.tiles[hole.y][hole.x] = 7

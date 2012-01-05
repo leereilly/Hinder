@@ -97,7 +97,7 @@ window.Render =
         else
           @clearCanvas @canvases.dark, 0, 0, @main_canvas.width, @main_canvas.height
 
-    if obj.type == "enemy"
+    if obj.type == "enemy" || obj.type == "rescue"
       @clearCanvas(obj.canvas, obj.oldX*Map.tile_size, obj.oldY*Map.tile_size, Map.tile_size, Map.tile_size)
       @clearCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size)
 
