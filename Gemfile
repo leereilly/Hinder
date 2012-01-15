@@ -16,7 +16,7 @@ end
 
 group :production do
   gem 'heroku'
-#  gem 'pg'
+  gem 'pg'
 end
 
 group :development do
