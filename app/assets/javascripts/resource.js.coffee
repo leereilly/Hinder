@@ -6,7 +6,7 @@ window.Resource =
             door: {path: "/assets/textures/door.png"},
             player: {path: "/assets/textures/player.png"},
             enemy: {path: "/assets/textures/monster.png"},
-            rescue: {path: "/assets/textures/player.png"},  
+            rescue: {path: "/assets/textures/rescue.png"},  
             block: {path: "/assets/textures/box.png"},
             block_active: {path: "/assets/textures/box_active.png"},
             crate: {path: "/assets/textures/crate.png"},
