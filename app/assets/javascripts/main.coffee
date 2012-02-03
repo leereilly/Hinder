@@ -96,7 +96,7 @@ class Enemy
             @old_direction = @dir
             _turn++
             @maketurn _turn
-      @watch()
+      @watch() if @type == "enemy"
       Map.tiles[@y][@x] = 4
     return
   
@@ -200,7 +200,7 @@ class Enemy
     Render.object @ 
     return
   collision: (dir) ->
-    if @x > 13
+    if @x > 13 || @y < 1
       Map.tiles[@y][@x] = 0
       Render.clearCanvas(@canvas, @x*Map.tile_size, @y*Map.tile_size, Map.tile_size, Map.tile_size)
       @type = "none"
@@ -319,17 +319,17 @@ window.Map =
   
   convertDataToMap: (data) -> 
     
-    if Map.level == ""
+    if not Map.level
       Map.level = Game.getLevel('level')
-    if Map.level == ""
+    if not Map.level
       Map.level = Store.get "current level"
-    if Map.level == ""
+    if not Map.level
       Game.loadNew(data.map[0])
     else 
       for level in data.map 
         if level.id ==  Map.level
           
-          Game.loadNew(level)   
+          Game.loadNew(level)  
     return
   
   block_at: (x, y) ->
@@ -355,12 +355,9 @@ Game =
     Map.init()
     return
   loadNew: (mapdata) ->
-    console.log mapdata
     @levels.push(mapdata)
     Store.set "current level", mapdata.id
     Store.set "levels", @levels
-
-    console.log Store.get "levels"
 
     Resource.preload =>
       Render.init()
