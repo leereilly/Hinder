@@ -16,7 +16,9 @@ window.Render =
     console.log "Rendering tiles"
     
     @canvases.wall_shadows.context.drawImage(Resource.images.shadow_map.obj, 0, 0,@main_canvas.width,@main_canvas.height)
-    #@canvases.shadow_overlay.context.drawImage(Resource.images.shadow_overlay.obj, 0, 0,@main_canvas.width,@main_canvas.height)
+    @canvases.shadow_overlay.context.globalAlpha = 1
+    console.log @canvases.shadow_overlay.context.globalAlpha
+    @canvases.shadow_overlay.context.drawImage(Resource.images.shadow_overlay.obj, 0, 0,@main_canvas.width,@main_canvas.height)
     
     @walls = [Resource.images.wall_1, Resource.images.wall_2, Resource.images.wall_3]
   

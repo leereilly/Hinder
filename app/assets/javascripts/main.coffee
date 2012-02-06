@@ -307,6 +307,8 @@ window.Map =
   holes: []
   complete: false
   dark: ""
+  overlay: ""
+  floor: ""
   exit: ""
 
   init: () ->
@@ -358,7 +360,11 @@ Game =
     @levels.push(mapdata)
     Store.set "current level", mapdata.id
     Store.set "levels", @levels
+    
+    Map.overlay = if mapdata.overlay then mapdata.overlay else "shadow_overlay.png"
+    Map.floor = if mapdata.floor then mapdata.floor else "shadow_map.png"
 
+    console.log Map.floor
     Resource.preload =>
       Render.init()
       Map.tiles = mapdata.tile
@@ -369,6 +375,9 @@ Game =
           
           if block == 1
             Render.object {"type": "block", "typeid": block, "canvas": Render.canvases.main, "x": x, "y": y, "texture": Render.walls[Math.floor(Math.random() * Render.walls.length)].obj, "shadow": Resource.images.wall_shadow.obj}
+          else
+            Render.clearCanvas(Render.canvases.shadow_overlay, (x*Map.tile_size) + 1, (y*Map.tile_size) + 1, Map.tile_size, Map.tile_size)
+
           if block == 2
             Render.object {"type": "block", "typeid": block, "canvas": Render.canvases.main, "x": x, "y": y, "texture": Resource.images.block.obj, "shadow": Resource.images.block_shadow.obj}
           if block == 5

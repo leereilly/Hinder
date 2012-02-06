@@ -23,6 +23,8 @@ window.Resource =
             shadow_overlay: {path: "/assets/textures/shadow_overlay.png"}
           }
   preload: (@callback) ->
+    @images.shadow_map = {path: "/assets/textures/#{Map.floor}"} if Map.floor
+    @images.shadow_overlay = {path: "/assets/textures/#{Map.overlay}"} if Map.overlay
     @unloaded = 0
     for own name, image of @images
       @unloaded++
