@@ -360,7 +360,7 @@ Game =
     @levels.push(mapdata)
     Store.set "current level", mapdata.id
     Store.set "levels", @levels
-    
+
     Map.overlay = if mapdata.overlay then mapdata.overlay else "shadow_overlay.png"
     Map.floor = if mapdata.floor then mapdata.floor else "shadow_map.png"
 
@@ -490,5 +490,6 @@ Game =
     return
  
 jQuery ->
+  console.log "ABC"
   Game.init()  
   return
