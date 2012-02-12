@@ -367,6 +367,9 @@ Game =
     return
   loadNew: (mapdata) ->
     @levels.push(mapdata)
+
+    window.history.pushState 'page2', 'Title', '/home/index?level=' + Map.level
+
     Store.set "current level", mapdata.id
     Store.set "levels", @levels
 
