@@ -6,6 +6,7 @@ window.Render =
     @canvases.dark = {context: jQuery("#darkness")[0].getContext("2d")} 
     @canvases.shadow_overlay = {context: jQuery("#shadow_overlay")[0].getContext("2d")} 
     @canvases.main = {context: jQuery("#viewfield")[0].getContext("2d")} 
+    @canvases.shadow_map = {context: jQuery("#shadow_map")[0].getContext("2d")} 
     @canvases.wall_shadows = {context: jQuery("#wall_shadows")[0].getContext("2d")} 
     @canvases.object_shadows = {context: jQuery("#object_shadows")[0].getContext("2d")} 
     @canvases.player = {context: jQuery("#player")[0].getContext("2d")} 
@@ -15,7 +16,7 @@ window.Render =
 
     console.log "Rendering tiles"
     
-    @canvases.wall_shadows.context.drawImage(Resource.images.shadow_map.obj, 0, 0,@main_canvas.width,@main_canvas.height)
+    @canvases.shadow_map.context.drawImage(Resource.images.shadow_map.obj, 0, 0,@main_canvas.width,@main_canvas.height)
     @canvases.shadow_overlay.context.globalAlpha = 1
     console.log @canvases.shadow_overlay.context.globalAlpha
     @canvases.shadow_overlay.context.drawImage(Resource.images.shadow_overlay.obj, 0, 0,@main_canvas.width,@main_canvas.height)
