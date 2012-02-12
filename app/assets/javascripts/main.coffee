@@ -189,10 +189,10 @@ class Enemy
       @distY = @y - Player.y
       @distX = @x - Player.x
 
-      if @distX == 0 && @distY < 3 && @distY > -3
+      if @distX == 0 && @distY < 2 && @distY > -2
         location.reload true
 
-      if @distY == 0 && @distX < 3 && @distX > -3
+      if @distY == 0 && @distX < 2 && @distX > -2
         location.reload true
     else
       if @collision @states[1]
