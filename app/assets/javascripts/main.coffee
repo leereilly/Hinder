@@ -145,6 +145,7 @@ class Enemy
   follow: ->       
     @distY = @y - Player.y
     @distX = @x - Player.x
+
     if @distY > 0 && @distX > 0
       if @distY > @distX
         @states = ["up", "left"]
@@ -184,6 +185,15 @@ class Enemy
       @animate()
       Map.tiles[@oldY][@oldX] = 0
       Map.tiles[@y][@x] = 4
+
+      @distY = @y - Player.y
+      @distX = @x - Player.x
+
+      if @distX == 0 && @distY < 3 && @distY > -3
+        location.reload true
+
+      if @distY == 0 && @distX < 3 && @distX > -3
+        location.reload true
     else
       if @collision @states[1]
         @move(@states[1])   
@@ -229,6 +239,7 @@ window.Player =
   dir: "none"
   events: ""
   locked: false
+  contact: false
 
   init: (@x, @y) ->
     @oldX = @x
@@ -241,6 +252,7 @@ window.Player =
     @locked = false
 
   move: (dir) ->
+    return false if @contact == true
     @dir = dir
     if (@y == 0 && @dir == "up" && Map.exit.up != "")
       Map.level = Map.exit.up
@@ -369,6 +381,7 @@ Game =
     @levels.push(mapdata)
 
     window.history.pushState 'page2', 'Title', '/home/index?level=' + Map.level
+    Player.contact = false
 
     Store.set "current level", mapdata.id
     Store.set "levels", @levels
