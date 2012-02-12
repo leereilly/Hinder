@@ -41,7 +41,6 @@ window.Resource =
         @unloaded++
         obj = $("<img src=\"#{image.path}\">")
         @images[name].obj = obj.get(0)
-        #console.log @images[name].obj
         @images[name].loaded = true
         obj.load => @loaded()
     if @unloaded == 0 && @halt == false
@@ -49,6 +48,5 @@ window.Resource =
 
   loaded: () ->
     @unloaded--
-    console.log @unloaded
     if @unloaded <= 0 
       @callback()

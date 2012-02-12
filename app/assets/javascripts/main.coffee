@@ -310,6 +310,7 @@ window.Map =
   overlay: ""
   floor: ""
   exit: ""
+  jsonMap: ""
 
   init: () ->
     
@@ -317,9 +318,12 @@ window.Map =
     @markers = []
 
     $.getJSON('../test.json', @convertDataToMap)
+
     return
   
   convertDataToMap: (data) -> 
+
+    Map.jsonMap = data
     
     if not Map.level
       Map.level = Game.getLevel('level')
@@ -330,7 +334,6 @@ window.Map =
     else 
       for level in data.map 
         if level.id ==  Map.level
-          
           Game.loadNew(level)  
     return
   
@@ -354,7 +357,13 @@ Game =
     console.log "Next level"
     Player.movecount = 0
     Player.dir = "none"
-    Map.init()
+    Map.enemies = []
+    Map.markers = []
+    console.log Map.jsonMap
+    for level in Map.jsonMap.map 
+      if level.id ==  Map.level
+        Game.loadNew(level)
+    #Map.init()
     return
   loadNew: (mapdata) ->
     @levels.push(mapdata)
@@ -364,7 +373,6 @@ Game =
     Map.overlay = if mapdata.overlay then mapdata.overlay else "shadow_overlay.png"
     Map.floor = if mapdata.floor then mapdata.floor else "shadow_map.png"
 
-    console.log Map.floor
     Resource.preload =>
       Render.init()
       Map.tiles = mapdata.tile
