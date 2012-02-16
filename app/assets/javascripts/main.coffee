@@ -145,6 +145,9 @@ class Enemy
   follow: ->       
     @distY = @y - Player.y
     @distX = @x - Player.x
+    if @nextToPlayer(@distX, @distY)
+      return
+    
 
     if @distY > 0 && @distX > 0
       if @distY > @distX
@@ -168,6 +171,14 @@ class Enemy
         @states = ["right", "up"]
     @move(@states[0])    
     return
+  
+  nextToPlayer: (_distX, _distY) ->
+    if (_distY == 0 && _distX < 2 && _distX > -2) || (_distX == 0 && _distY < 2 && _distY > -2)
+      Player.locked = false
+      Map.init()
+      return true
+    return false
+    
     
   move: (dir) ->
     @dir = dir
@@ -182,18 +193,15 @@ class Enemy
       @y += 1 if @dir == "down"      
       @y -= 1 if @dir == "up"
       
+      if @nextToPlayer(@x - Player.x, @y - Player.y)
+        return
+      
       @animate()
+
       Map.tiles[@oldY][@oldX] = 0
       Map.tiles[@y][@x] = 4
 
-      @distY = @y - Player.y
-      @distX = @x - Player.x
-
-      if @distX == 0 && @distY < 2 && @distY > -2
-        location.reload true
-
-      if @distY == 0 && @distX < 2 && @distX > -2
-        location.reload true
+        #location.reload true
     else
       if @collision @states[1]
         @move(@states[1])   
@@ -372,19 +380,19 @@ Game =
     Map.enemies = []
     Map.markers = []
     console.log Map.jsonMap
-    for level in Map.jsonMap.map 
-      if level.id ==  Map.level
+    for level in Map.jsonMap.map
+      if level.id ==  Map.level  
         Game.loadNew(level)
     #Map.init()
     return
   loadNew: (mapdata) ->
-    @levels.push(mapdata)
+    #@levels.push(mapdata)
 
     window.history.pushState 'page2', 'Title', '/home/index?level=' + Map.level
     Player.contact = false
 
     Store.set "current level", mapdata.id
-    Store.set "levels", @levels
+    #Store.set "levels", @levels
 
     Map.overlay = if mapdata.overlay then mapdata.overlay else "shadow_overlay.png"
     Map.floor = if mapdata.floor then mapdata.floor else "shadow_map.png"
