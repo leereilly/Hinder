@@ -253,8 +253,7 @@ window.Player =
     @oldX = @x
     @oldY = @y
     @canvas = Render.canvases.player
-    @texture = Resource.images.player.obj
-    console.log "Rendering player"    
+    @texture = Resource.images.player.obj    
     Render.object @
   unlock: () ->
     @locked = false
@@ -377,9 +376,11 @@ Game =
     console.log "Next level"
     Player.movecount = 0
     Player.dir = "none"
+    Player.locked = false
     Map.enemies = []
     Map.markers = []
-    console.log Map.jsonMap
+    Map.complete = false
+    Map.dark = ""
     for level in Map.jsonMap.map
       if level.id ==  Map.level  
         Game.loadNew(level)
@@ -522,6 +523,5 @@ Game =
     return
  
 jQuery ->
-  console.log "ABC"
   Game.init()  
   return

@@ -13,18 +13,14 @@ window.Render =
     @canvases.markers = {context: jQuery("#markers")[0].getContext("2d")} 
 
     @clearAllCanvases()
-
-    console.log "Rendering tiles"
     
     @canvases.shadow_map.context.drawImage(Resource.images.shadow_map.obj, 0, 0,@main_canvas.width,@main_canvas.height)
     @canvases.shadow_overlay.context.globalAlpha = 1
-    console.log @canvases.shadow_overlay.context.globalAlpha
     @canvases.shadow_overlay.context.drawImage(Resource.images.shadow_overlay.obj, 0, 0,@main_canvas.width,@main_canvas.height)
     
     @walls = [Resource.images.wall_1, Resource.images.wall_2, Resource.images.wall_3]
   
   clearAllCanvases: () ->
-    console.log "Clear all"
     for canvas, context of @canvases
       context.context.clearRect(0, 0, @main_canvas.width, @main_canvas.height)
     return
@@ -98,7 +94,9 @@ window.Render =
         if (Map.dark == "start" && Map.complete == false) || (Map.dark == "end" && Map.complete == true) || Map.dark == "all"
           @render_darkness(obj.x*Map.tile_size + 10, obj.y*Map.tile_size + 2)
         else
-          @clearCanvas @canvases.dark, 0, 0, @main_canvas.width, @main_canvas.height
+          if (Map.dark == "start" && Map.complete == true)
+            Map.dark = "none"
+            @clearCanvas @canvases.dark, 0, 0, @main_canvas.width, @main_canvas.height     
 
     if obj.type == "enemy" || obj.type == "rescue"
       @clearCanvas(obj.canvas, obj.oldX*Map.tile_size, obj.oldY*Map.tile_size, Map.tile_size, Map.tile_size)
