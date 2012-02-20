@@ -35,6 +35,7 @@ window.Resource =
 
     @halt = false
     @unloaded = 0
+	
     for own name, image of @images
       if image.loaded == "false" || image.loaded == "nocache"
         @halt = true
