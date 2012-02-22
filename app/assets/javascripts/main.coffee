@@ -208,7 +208,7 @@ class Enemy
     return
     
   animate: ->
-    if @movecount < Map.tile_size - 10
+    if @movecount < Map.tile_size - 10 && 1 == 2 
       @movecount += 5 
       requestAnimFrame(=> @animate())      
     else
@@ -299,7 +299,7 @@ window.Player =
     return
     
   animate: ->
-    if @movecount < Map.tile_size      
+    if @movecount < Map.tile_size && 1 == 2     
       @movecount += 3 + (@movecount /3)
       @movecount = ~~ (@movecount+0.5);      
       requestAnimFrame(=> @animate())      
@@ -494,7 +494,7 @@ Game =
       marker.checkblock()
       if marker.occupied == true
         placed_blocks++
-    #console.log "Placed blocks: #{placed_blocks} / #{Map.markers.length}"
+
     if placed_blocks == Map.markers.length
       Map.complete = true
       #console.log "Done"
