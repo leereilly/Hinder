@@ -181,6 +181,9 @@ class Enemy
     
     
   move: (dir) ->
+    if Player.locked == false
+      return
+
     @dir = dir
 
     if @collision @dir
