@@ -208,7 +208,7 @@ class Enemy
     return
     
   animate: ->
-    if @movecount < Map.tile_size - 10 && 1 == 2 
+    if @movecount < Map.tile_size - 10
       @movecount += 5 
       requestAnimFrame(=> @animate())      
     else
@@ -299,7 +299,7 @@ window.Player =
     return
     
   animate: ->
-    if @movecount < Map.tile_size && 1 == 2     
+    if @movecount < Map.tile_size && 1     
       @movecount += 3 + (@movecount /3)
       @movecount = ~~ (@movecount+0.5);      
       requestAnimFrame(=> @animate())      
@@ -409,7 +409,7 @@ Game =
           if block == 1
             Render.object {"type": "block", "typeid": block, "canvas": Render.canvases.main, "x": x, "y": y, "texture": Render.walls[Math.floor(Math.random() * Render.walls.length)].obj, "shadow": Resource.images.wall_shadow.obj}
           else
-            Render.clearCanvas(Render.canvases.shadow_overlay, (x*Map.tile_size) + 1, (y*Map.tile_size) + 1, Map.tile_size, Map.tile_size)
+            Render.clearCanvas(Render.canvases.shadow_overlay, (x*Map.tile_size), (y*Map.tile_size), Map.tile_size, Map.tile_size)
 
           if block == 2
             Render.object {"type": "block", "typeid": block, "canvas": Render.canvases.main, "x": x, "y": y, "texture": Resource.images.block.obj, "shadow": Resource.images.block_shadow.obj}
@@ -508,7 +508,6 @@ Game =
           if block == 8
             Map.tiles[y][x] = 0
             Render.clearCanvas(Render.canvases.main, x*Map.tile_size, y*Map.tile_size, Map.tile_size, Map.tile_size)
-            #Render.clear_tile(x,y) 
     else
       Map.complete = false     
     @step++
