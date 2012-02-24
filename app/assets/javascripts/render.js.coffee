@@ -35,19 +35,23 @@ window.Render =
 
   block_update: (clear_tile, draw_tile, movecount, @type) ->
     @clearCanvas(@canvases.main, clear_tile.x*Map.tile_size, clear_tile.y*Map.tile_size, Map.tile_size, Map.tile_size)
-    @clearCanvas(@canvases.object_shadows, 0, 0, @main_canvas.width, @main_canvas.height)
-
+    @clearCanvas(@canvases.object_shadows, clear_tile.x*Map.tile_size, clear_tile.y*Map.tile_size, Map.tile_size * 2, Map.tile_size * 2)
+    console.log clear_tile
     if @type == 2
       @renderCanvas(@canvases.main, draw_tile.x*Map.tile_size, draw_tile.y*Map.tile_size, Map.tile_size, Map.tile_size, Resource.images.block.obj)
     if @type == 5
       @renderCanvas(@canvases.main, draw_tile.x*Map.tile_size, draw_tile.y*Map.tile_size, Map.tile_size, Map.tile_size, Resource.images.crate.obj)
-
-    for row, y in Map.tiles
-      for block, x in row
+    
+      
+    
+    for row, y in Map.tiles     
+      for block, x in row     
         if block == 2
-          @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), Resource.images.block_shadow.obj)  
+          console.log "TEST"
+          #@renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), Resource.images.block_shadow.obj)  
         if block == 5
-          @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), Resource.images.crate_shadow.obj) 
+          console.log "TEST"
+          #@renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), Resource.images.crate_shadow.obj) 
     return
 
   render_darkness: (x, y) ->
