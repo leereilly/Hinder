@@ -61,10 +61,12 @@ class Enemy
 
   init: ->
     @animationSteps = [
-      Map.tile_size * 0.8
-      Map.tile_size * 0.6
-      Map.tile_size * 0.4
-      Map.tile_size * 0.2
+      Math.round(Map.tile_size * 0.8)
+      Math.round(Map.tile_size * 0.7)
+      Math.round(Map.tile_size * 0.6)
+      Math.round(Map.tile_size * 0.4)
+      Math.round(Map.tile_size * 0.2)
+      Math.round(Map.tile_size * 0.1)
     ]
     console.log "Enemy loaded"
     @canvas = Render.canvases.main
@@ -214,7 +216,7 @@ class Enemy
         @move(@states[1])   
     return
 
-  animate: (step = 4) ->
+  animate: (step = 6) ->
     step--
     if step >= 1     
       @movecount = @animationSteps[step] 
@@ -261,12 +263,12 @@ window.Player =
 
   init: (@x, @y) ->
     @animationSteps = [
-      Map.tile_size * 0.8
-      Map.tile_size * 0.7
-      Map.tile_size * 0.6
-      Map.tile_size * 0.4
-      Map.tile_size * 0.2
-      Map.tile_size * 0.1
+      Math.round(Map.tile_size * 0.8)
+      Math.round(Map.tile_size * 0.7)
+      Math.round(Map.tile_size * 0.6)
+      Math.round(Map.tile_size * 0.4)
+      Math.round(Map.tile_size * 0.2)
+      Math.round(Map.tile_size * 0.1)
     ]
     console.log @animationSteps
     @oldX = @x
