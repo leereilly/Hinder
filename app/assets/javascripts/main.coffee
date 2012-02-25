@@ -39,7 +39,7 @@ class Block
     next_tile = Map.next_block(x, y, dir)
     Map.tiles[next_tile.y][next_tile.x] = Map.tiles[y][x]
     Map.tiles[y][x] = 0
-    Render.block_update Map.block_at(@x, @y), Map.next_block(@x, @y, dir), 0, @type
+    Render.block_update Map.block_at(@x, @y), Map.next_block(@x, @y, dir), @type
     #@animate()
 
 class Enemy
@@ -57,8 +57,15 @@ class Enemy
   distX: 0
   states: []
   follows: false
+  animationSteps: []
 
   init: ->
+    @animationSteps = [
+      Map.tile_size * 0.8
+      Map.tile_size * 0.6
+      Map.tile_size * 0.4
+      Map.tile_size * 0.2
+    ]
     console.log "Enemy loaded"
     @canvas = Render.canvases.main
     if @type == "enemy"
@@ -206,16 +213,18 @@ class Enemy
       if @collision @states[1]
         @move(@states[1])   
     return
-    
-  animate: ->
-    if @movecount < Map.tile_size - 10
-      @movecount += 5 
-      requestAnimFrame(=> @animate())      
+
+  animate: (step = 4) ->
+    step--
+    if step >= 1     
+      @movecount = @animationSteps[step] 
+      requestAnimFrame(=> @animate(step))      
     else
       @old_direction = @dir
       @dir = "none"
       @movecount = 0
     Render.object @ 
+
     return
   collision: (dir) ->
     if @x > 13 || @y < 1
@@ -248,8 +257,17 @@ window.Player =
   events: ""
   locked: false
   contact: false
+  animationSteps: []
 
   init: (@x, @y) ->
+    @animationSteps = [
+      Map.tile_size * 0.8
+      Map.tile_size * 0.6
+      Map.tile_size * 0.4
+      Map.tile_size * 0.2
+      Map.tile_size * 0.1
+    ]
+    console.log @animationSteps
     @oldX = @x
     @oldY = @y
     @canvas = Render.canvases.player
@@ -298,11 +316,11 @@ window.Player =
       @locked = false   
     return
     
-  animate: ->
-    if @movecount < Map.tile_size && 1     
-      @movecount += 3 + (@movecount /3)
-      @movecount = ~~ (@movecount+0.5);      
-      requestAnimFrame(=> @animate())      
+  animate: (step = 5) ->
+    step--
+    if step >= 1     
+      @movecount = @animationSteps[step] 
+      requestAnimFrame(=> @animate(step))      
     else
       @dir = "none"
       @movecount = 0
@@ -319,7 +337,7 @@ window.Player =
 
 window.Map =
   level: ""
-  tile_size: 40
+  tile_size: 20
   tiles: []
   markers: []
   enemies: []
@@ -332,7 +350,8 @@ window.Map =
   jsonMap: ""
 
   init: () ->
-    
+    @tile_size = jQuery("#viewfield")[0].width / 15
+
     @enemies = []
     @markers = []
 

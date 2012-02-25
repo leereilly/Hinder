@@ -33,25 +33,29 @@ window.Render =
     canvascontext.context.drawImage(texture, x, y, width, height)
     return
 
-  block_update: (clear_tile, draw_tile, movecount, @type) ->
-    @clearCanvas(@canvases.main, clear_tile.x*Map.tile_size, clear_tile.y*Map.tile_size, Map.tile_size, Map.tile_size)
-    @clearCanvas(@canvases.object_shadows, clear_tile.x*Map.tile_size, clear_tile.y*Map.tile_size, Map.tile_size * 2, Map.tile_size * 2)
-    console.log clear_tile
+  block_update: (clear_tile, draw_tile, @type) ->
+    clear_x = clear_tile.x*Map.tile_size
+    clear_y = clear_tile.y*Map.tile_size
+    draw_x = draw_tile.x*Map.tile_size
+    draw_y = draw_tile.y*Map.tile_size
+    shadow_x = Map.tile_size + (Map.tile_size / 4)
+    shadow_y = Map.tile_size +  (Map.tile_size / 2)
+
+    @clearCanvas(@canvases.object_shadows, 0, 0, @main_canvas.width, @main_canvas.height)
+
+    @clearCanvas(@canvases.main, clear_x, clear_y, Map.tile_size, Map.tile_size)
+
     if @type == 2
-      @renderCanvas(@canvases.main, draw_tile.x*Map.tile_size, draw_tile.y*Map.tile_size, Map.tile_size, Map.tile_size, Resource.images.block.obj)
+        @renderCanvas(@canvases.main, draw_x, draw_y, Map.tile_size, Map.tile_size, Resource.images.block.obj)
     if @type == 5
-      @renderCanvas(@canvases.main, draw_tile.x*Map.tile_size, draw_tile.y*Map.tile_size, Map.tile_size, Map.tile_size, Resource.images.crate.obj)
-    
+        @renderCanvas(@canvases.main, draw_x, draw_y, Map.tile_size, Map.tile_size, Resource.images.crate.obj)
       
-    
     for row, y in Map.tiles     
-      for block, x in row     
+      for block, x in row                       
         if block == 2
-          console.log "TEST"
-          #@renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), Resource.images.block_shadow.obj)  
+          @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,shadow_x,shadow_y, Resource.images.block_shadow.obj)  
         if block == 5
-          console.log "TEST"
-          #@renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), Resource.images.crate_shadow.obj) 
+          @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,shadow_x,shadow_y, Resource.images.crate_shadow.obj)    
     return
 
   render_darkness: (x, y) ->
@@ -85,15 +89,15 @@ window.Render =
       @clearCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size)
 
       if Player.dir == "right"
-        @renderCanvas(obj.canvas, ((obj.x*Map.tile_size + 10) + Player.movecount) - Map.tile_size, obj.y*Map.tile_size + 2, 25, 36, obj.texture)
+        @renderCanvas(obj.canvas, ((obj.x*Map.tile_size) + Player.movecount) - Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size, obj.texture)
       if Player.dir == "left" 
-        @renderCanvas(obj.canvas, ((obj.x*Map.tile_size + 10) - Player.movecount) + Map.tile_size, obj.y*Map.tile_size + 2, 25, 36, obj.texture)
+        @renderCanvas(obj.canvas, ((obj.x*Map.tile_size) - Player.movecount) + Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size, obj.texture)
       if Player.dir == "up"
-        @renderCanvas(obj.canvas, obj.x*Map.tile_size + 10, ((obj.y*Map.tile_size + 2) + Map.tile_size) - Player.movecount, 25, 36, obj.texture)
+        @renderCanvas(obj.canvas, obj.x*Map.tile_size, ((obj.y*Map.tile_size) + Map.tile_size) - Player.movecount, Map.tile_size, Map.tile_size, obj.texture)
       if Player.dir == "down"
-        @renderCanvas(obj.canvas, obj.x*Map.tile_size + 10, ((obj.y*Map.tile_size + 2) - Map.tile_size) + Player.movecount, 25, 36, obj.texture)
+        @renderCanvas(obj.canvas, obj.x*Map.tile_size, ((obj.y*Map.tile_size) - Map.tile_size) + Player.movecount, Map.tile_size, Map.tile_size, obj.texture)
       if Player.dir == "none"  
-        @renderCanvas(obj.canvas, obj.x*Map.tile_size + 10, obj.y*Map.tile_size + 2, 25, 36, obj.texture)
+        @renderCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size, obj.texture)
 
         if (Map.dark == "start" && Map.complete == false) || (Map.dark == "end" && Map.complete == true) || Map.dark == "all"
           @render_darkness(obj.x*Map.tile_size + 10, obj.y*Map.tile_size + 2)

@@ -4,7 +4,7 @@ window.Resource =
             wall_2: {path: "/assets/textures/wall_2.jpg", loaded: "false"}, 
             wall_3: {path: "/assets/textures/wall_3.jpg", loaded: "false"},
             door: {path: "/assets/textures/door.png", loaded: "false"},
-            player: {path: "/assets/textures/player.png", loaded: "false"},
+            player: {path: "/assets/textures/player_low.png", loaded: "false"},
             enemy: {path: "/assets/textures/monster.png", loaded: "false"},
             rescue: {path: "/assets/textures/rescue.png", loaded: "false"},  
             block: {path: "/assets/textures/box.png", loaded: "false"},
