@@ -262,6 +262,7 @@ window.Player =
   init: (@x, @y) ->
     @animationSteps = [
       Map.tile_size * 0.8
+      Map.tile_size * 0.7
       Map.tile_size * 0.6
       Map.tile_size * 0.4
       Map.tile_size * 0.2
@@ -316,7 +317,7 @@ window.Player =
       @locked = false   
     return
     
-  animate: (step = 5) ->
+  animate: (step = 6) ->
     step--
     if step >= 1     
       @movecount = @animationSteps[step] 
