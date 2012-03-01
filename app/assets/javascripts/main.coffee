@@ -544,5 +544,10 @@ Game =
     return
  
 jQuery ->
+	
+	setTimeout( ->
+	    window.scrollTo(0, 1);
+	, 0)
+	
   Game.init()  
   return
