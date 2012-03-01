@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
 	def index
-		@canvassize = 100
+		@canvassize = 200
 	end
 end
