@@ -353,7 +353,7 @@ window.Map =
   jsonMap: ""
 
   init: () ->
-    @tile_size = jQuery("#viewfield")[0].width / 15
+    @tile_size = Math.round(jQuery("#viewfield")[0].width / 15)
 
     @enemies = []
     @markers = []
