@@ -463,7 +463,7 @@ Game =
             Player.init(x,y)
     
     if Player.events == ""
-      $("#container").touchwipe {
+      $("#mainWrapper").touchwipe {
         wipeLeft: ->
           Player.move "left"
           return
