@@ -10,6 +10,7 @@ body
   padding: 0
   text-align: center
   background: url('textures/page_bg.png')
+  -webkit-transform: scale3d(1.2,1.2,0) translate3d(0px, 0px, 0)
 
 #viewfield, #shadow_overlay, #shadow_map, #wall_shadows, #object_shadows, #markers, #darkness, #player
   position: absolute
@@ -32,8 +33,8 @@ body
   position: relative
   width: auto
   height: auto
-  width: 600px
-  height: 600px
+  width: 512px
+  height: 512px
   overflow: visible
   margin:  0 auto
   border: 2px solid red
@@ -48,4 +49,4 @@ canvas
   height: auto
   //-webkit-transform: scale(1.1)
   //-webkit-transform-origin: 1.5 1.5
-  -webkit-transform: scale3d(1.1,1.1,0) translate3d(23px, 23px, 0)
+  //-webkit-transform: scale3d(1.1,1.1,0) translate3d(23px, 23px, 0)
