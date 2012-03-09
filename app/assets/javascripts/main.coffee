@@ -263,6 +263,7 @@ window.Player =
 
   init: (@x, @y) ->
     @animationSteps = [
+      Math.round(Map.tile_size * 0.9)
       Math.round(Map.tile_size * 0.8)
       Math.round(Map.tile_size * 0.7)
       Math.round(Map.tile_size * 0.6)
@@ -319,7 +320,7 @@ window.Player =
       @locked = false   
     return
     
-  animate: (step = 6) ->
+  animate: (step = 7) ->
     step--
     if step >= 1     
       @movecount = @animationSteps[step] 
@@ -519,7 +520,6 @@ Game =
 
     if placed_blocks == Map.markers.length
       Map.complete = true
-      #console.log "Done"
       for hole in Map.holes
         Map.tiles[hole.y][hole.x] = 7
         Render.object hole

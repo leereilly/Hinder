@@ -84,7 +84,6 @@ window.Render =
         @renderCanvas(@canvases.wall_shadows, obj.x*Map.tile_size, obj.y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), obj.shadow)
 
     if obj.type == "player"
-
       @clearCanvas(obj.canvas, obj.oldX*Map.tile_size, obj.oldY*Map.tile_size, Map.tile_size, Map.tile_size)
 
       if Player.dir == "right"
@@ -96,7 +95,6 @@ window.Render =
       if Player.dir == "down"
         @renderCanvas(obj.canvas, obj.x*Map.tile_size, ((obj.y*Map.tile_size) - Map.tile_size) + Player.movecount, Map.tile_size, Map.tile_size, obj.texture)
       if Player.dir == "none"  
-
         @clearCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size)
         @renderCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size, obj.texture)
 
