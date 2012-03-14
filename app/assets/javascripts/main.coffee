@@ -61,8 +61,8 @@ class Enemy
 
   init: ->
     @animationSteps = [
+      Math.round(Map.tile_size * 0.9)
       Math.round(Map.tile_size * 0.8)
-      Math.round(Map.tile_size * 0.7)
       Math.round(Map.tile_size * 0.6)
       Math.round(Map.tile_size * 0.4)
       Math.round(Map.tile_size * 0.2)
@@ -216,7 +216,7 @@ class Enemy
         @move(@states[1])   
     return
 
-  animate: (step = 6) ->
+  animate: (step = 5) ->
     step--
     if step >= 1     
       @movecount = @animationSteps[step] 
@@ -265,7 +265,6 @@ window.Player =
     @animationSteps = [
       Math.round(Map.tile_size * 0.9)
       Math.round(Map.tile_size * 0.8)
-      Math.round(Map.tile_size * 0.7)
       Math.round(Map.tile_size * 0.6)
       Math.round(Map.tile_size * 0.4)
       Math.round(Map.tile_size * 0.2)
@@ -320,8 +319,7 @@ window.Player =
       @locked = false   
     return
     
-  animate: (step = 7) ->
-    step--
+  animate: (step = 5) ->
     if step >= 1     
       @movecount = @animationSteps[step] 
       requestAnimFrame(=> @animate(step))      
@@ -330,6 +328,7 @@ window.Player =
       @movecount = 0
       Game.cycle() 
     Render.object @ 
+    step--
     return
     
   collision: (dir) ->
@@ -506,7 +505,7 @@ Game =
     setTimeout ( =>
       Map.enemies[i - 1].maketurn 0
       @move_enemy(i) if --i
-    ), 50
+    ), 20
     
   cycle: ->
     Player.locked = true
@@ -530,12 +529,13 @@ Game =
           if block == 8
             Map.tiles[y][x] = 0
             Render.clearCanvas(Render.canvases.main, x*Map.tile_size, y*Map.tile_size, Map.tile_size, Map.tile_size)
+            Render.block_update({x: x, y: y},{x: x, y: y}, 8)
     else
       Map.complete = false     
     @step++
     setTimeout ( ->
       Player.unlock()
-    ), 50
+    ), 20
 
     return
     

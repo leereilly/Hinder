@@ -56,6 +56,8 @@ window.Render =
           @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,shadow_x,shadow_y, Resource.images.block_shadow.obj)  
         if block == 5
           @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,shadow_x,shadow_y, Resource.images.crate_shadow.obj)    
+        if block == 8
+          @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,shadow_x,shadow_y, Resource.images.door_shadow.obj)  
     return
 
   render_darkness: (x, y) ->
@@ -81,9 +83,11 @@ window.Render =
       if obj.typeid == 5
         @renderCanvas(@canvases.object_shadows, obj.x*Map.tile_size, obj.y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), obj.shadow)       
       if obj.typeid == 8
-        @renderCanvas(@canvases.wall_shadows, obj.x*Map.tile_size, obj.y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), obj.shadow)
+        @renderCanvas(@canvases.object_shadows, obj.x*Map.tile_size, obj.y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), obj.shadow)
 
     if obj.type == "player"
+
+      @clearCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size)
       @clearCanvas(obj.canvas, obj.oldX*Map.tile_size, obj.oldY*Map.tile_size, Map.tile_size, Map.tile_size)
 
       if Player.dir == "right"
@@ -95,7 +99,6 @@ window.Render =
       if Player.dir == "down"
         @renderCanvas(obj.canvas, obj.x*Map.tile_size, ((obj.y*Map.tile_size) - Map.tile_size) + Player.movecount, Map.tile_size, Map.tile_size, obj.texture)
       if Player.dir == "none"  
-        @clearCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size)
         @renderCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size, obj.texture)
 
         if (Map.dark == "start" && Map.complete == false) || (Map.dark == "end" && Map.complete == true) || Map.dark == "all"
