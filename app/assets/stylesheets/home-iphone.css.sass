@@ -1,14 +1,9 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-//@import "compass"
-
 body
   color:  #000
   margin: 0
   padding: 0
   text-align: center
-  background-image: -webkit-radial-gradient(circle, rgba(0,0,0,0.01), rgba(0,0,0,0.3)), url('textures/page_bg.png')
+  background-image: url('textures/page_bg.png')
 
 #viewfield, #shadow_overlay, #shadow_map, #wall_shadows, #object_shadows, #markers, #darkness, #player
   position: absolute
@@ -17,7 +12,6 @@ body
   
 #markers
   background: url('textures/floor.png')
-  //position: static
 
 #wall_shadows
   left: 0px
@@ -51,4 +45,4 @@ canvas
   
   //-webkit-transform: scale(1.1)
   //-webkit-transform-origin: 1.5 1.5
-  //-webkit-transform: scale3d(1.1,1.1,0) translate3d(23px, 23px, 0)
+  -webkit-transform: scale3d(1.2,1.2,0) translate3d(40px, 40px, 0)
