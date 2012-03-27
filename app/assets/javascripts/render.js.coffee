@@ -53,7 +53,14 @@ window.Render =
     for row, y in Map.tiles     
       for block, x in row                       
         if block == 2
-          @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,shadow_x,shadow_y, Resource.images.block_shadow.obj)  
+          is_render = false
+          for marker in Map.markers
+            if y == marker.y && x == marker.x
+              is_render = true
+              @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,shadow_x,shadow_y, Resource.images.block_shadow_active.obj)               
+          
+          if is_render == false
+            @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,shadow_x,shadow_y, Resource.images.block_shadow.obj)  
         if block == 5
           @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,shadow_x,shadow_y, Resource.images.crate_shadow.obj)    
         if block == 8

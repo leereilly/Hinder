@@ -1,4 +1,4 @@
-count = 1
+count = 0
 window.requestAnimFrame = (->
   func =  window.requestAnimationFrame || 
           window.webkitRequestAnimationFrame || 
@@ -17,7 +17,7 @@ class Marker
   checkblock: () ->
     if Map.block_at(@x, @y).type == 2
       if @rendered == false
-        console.log "Test"
+        #console.log "Test"
         Render.object {"type": "block", "typeid": 2, "canvas": Render.canvases.main, "x": @x, "y": @y, "texture": @texture, "shadow": Resource.images.block_shadow_active.obj}
         @rendered = true
       @occupied = true
@@ -216,8 +216,7 @@ class Enemy
         @move(@states[1])   
     return
 
-  animate: (step = 5) ->
-    step--
+  animate: (step = 4) ->
     if step >= 1     
       @movecount = @animationSteps[step] 
       requestAnimFrame(=> @animate(step))      
@@ -225,6 +224,7 @@ class Enemy
       @old_direction = @dir
       @dir = "none"
       @movecount = 0
+    step--
     Render.object @ 
 
     return
@@ -295,9 +295,8 @@ window.Player =
       Game.nextLevel()
       return
     if (@x == 14 && @dir == "right" && Map.exit.right != "")
-      Map.level = Map.exit.right
+      Score.submitScore()
       @locked = false
-      Game.nextLevel()
       return
 
     if @collision @dir
@@ -388,6 +387,40 @@ window.Map =
       when "right" then @block_at(x+1,y)
       when "left" then @block_at(x-1,y)
 
+Score =
+  moves: 0
+  highscore_moves: 0
+  init: ->
+    @moves = 0
+    @highscore_moves = 1000
+    @updateScore @moves, ".level-moves-user"
+    callback = (response) -> Score.updateHighscore response
+    jQuery.get './../highscore.js?level=' + Map.level, {}, callback, 'json'
+  
+  changeStats: () ->
+    @moves++
+    @updateScore(@moves, ".level-moves-user")
+  
+  updateHighscore: (highscore_data) ->
+    if highscore_data
+      @highscore_moves = highscore_data.moves
+      @updateScore highscore_data.moves, ".level-moves-highscore"
+    else
+      @updateScore "-", ".level-moves-highscore"
+
+  submitScore: () ->
+    if @highscore_moves > @moves
+      alert "New highscore with #{@moves} moves."
+      callback = (response) -> Game.nextLevel()
+      jQuery.get './../highscore.js?level=' + Map.level + '&moves=' + @moves, {}, callback, 'json'
+    else
+      Game.nextLevel()
+
+  
+  updateScore: (score,element_class) ->
+    jQuery(element_class).html(score)
+
+
 Game =
   step: 0
   levels: []
@@ -396,6 +429,7 @@ Game =
     Map.init()
   nextLevel: ->
     console.log "Next level"
+    Map.level = Map.exit.right
     Player.movecount = 0
     Player.dir = "none"
     Player.locked = false
@@ -422,6 +456,9 @@ Game =
 
     Resource.preload =>
       Render.init()
+
+      Score.init()
+
       Map.tiles = mapdata.tile
       Map.dark = mapdata.dark
       Map.exit = mapdata.exit
@@ -508,8 +545,10 @@ Game =
     ), 20
     
   cycle: ->
+    Score.changeStats()
     Player.locked = true
     placed_blocks = 0
+
     @move_enemy(Map.enemies.length) if Map.enemies.length > 0
       
     for marker in Map.markers
