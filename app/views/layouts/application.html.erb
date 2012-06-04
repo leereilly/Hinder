@@ -3,33 +3,32 @@
 <head>
   <title>Hinder</title>
   <%= stylesheet_link_tag    "hindergame" %>
+	
+	<%= javascript_include_tag "application" %>
+	
+	<%= javascript_include_tag "excanvas.compiled" %>
+	<%= javascript_include_tag "jquery.touchwipe.1.1.1" %>
 
-  <%= javascript_include_tag "application" %>
-  <!-- <%= csrf_meta_tags %> -->
-  <!-- /%meta{:name=>"viewport",:content=>"width=600, initial-scale=1, user-scalable=no"} -->
-  <meta content='width=device-width, initial-scale=1, user-scalable=no' name='viewport' />
+  <%= javascript_include_tag "main" %>
+	<%= javascript_include_tag "game" %>
+	<%= javascript_include_tag "map" %>
+	<%= javascript_include_tag "render" %>
+	<%= javascript_include_tag "resource" %>
+	<%= javascript_include_tag "storage" %>
+	
+	<script type="text/javascript">
 
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <!-- <meta name="viewport" content="width=512 target-densityDpi=device-dpi initial-scale=0.5 maximum-scale=0.5 user-scalable=no"> -->
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />  
-  
-  
-  <!-- This meta tag ensures that the toolbar at the bottom of the browser 
-    is hidden when this page is accessed frome the Home Screen. -->
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-29142841-1']);
+	  _gaq.push(['_trackPageview']);
 
-<script type="text/javascript">
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-29142841-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
+	</script>
 </head>
 <body>
 <%= yield %>

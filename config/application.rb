@@ -44,5 +44,19 @@ module Hinder
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    config.assets.initialize_on_precompile = false
+
+    # Precompile additional assets. Defaults to [application.js, application.css, non-JS/CSS]
+    #config.assets.precompile += ['brands/helahalsinglandse.css']
+    #config.assets.precompile += ['brands/allehandase.css']
+    #config.assets.precompile += ['brands/dtse.css']
+    #config.assets.precompile << '*.js'
+    #config.assets.precompile << 'brands/*.css'
+    #config.assets.precompile += ['brands/*']
+    #config.assets.precompile += ['partials/*.js']
+    config.assets.precompile += ['excanvas.compiled.js','jquery.touchwipe.1.1.1.js','main.js','map.js','render.js', 'resource.js','storage.js']
+    
+    
   end
 end

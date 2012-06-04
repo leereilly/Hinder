@@ -3,6 +3,12 @@ window.Render =
   init: ->
     @main_canvas = jQuery("#viewfield")[0]
 
+    #jQuery("#player")[0].width = 200
+    jQuery("#player")[0].style.width = '600px'
+    #jQuery("#player")[0].height = 200
+    jQuery("#player")[0].style.height = '600px'
+
+
     @canvases.dark = {context: jQuery("#darkness")[0].getContext("2d")} 
     @canvases.shadow_overlay = {context: jQuery("#shadow_overlay")[0].getContext("2d")} 
     @canvases.main = {context: jQuery("#viewfield")[0].getContext("2d")} 
@@ -42,13 +48,9 @@ window.Render =
     shadow_y = Map.tile_size +  (Map.tile_size / 2)
 
     @clearCanvas(@canvases.object_shadows, 0, 0, @main_canvas.width, @main_canvas.height)
-
     @clearCanvas(@canvases.main, clear_x, clear_y, Map.tile_size, Map.tile_size)
-
-    if @type == 2
-        @renderCanvas(@canvases.main, draw_x, draw_y, Map.tile_size, Map.tile_size, Resource.images.block.obj)
-    if @type == 5
-        @renderCanvas(@canvases.main, draw_x, draw_y, Map.tile_size, Map.tile_size, Resource.images.crate.obj)
+    @renderCanvas(@canvases.main, draw_x, draw_y, Map.tile_size, Map.tile_size, Resource.images.block.obj) if @type == 2     
+    @renderCanvas(@canvases.main, draw_x, draw_y, Map.tile_size, Map.tile_size, Resource.images.crate.obj) if @type == 5
       
     for row, y in Map.tiles     
       for block, x in row                       
@@ -86,15 +88,13 @@ window.Render =
       if obj.typeid == 1
         @renderCanvas(@canvases.wall_shadows, obj.x*Map.tile_size, obj.y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), obj.shadow)
       if obj.typeid == 2
-        @renderCanvas(@canvases.object_shadows, obj.x*Map.tile_size, obj.y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), obj.shadow)  
+        @renderCanvas(@canvases.object_shadows, obj.x*Map.tile_size, obj.y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), obj.shadow) if obj.shadow
       if obj.typeid == 5
         @renderCanvas(@canvases.object_shadows, obj.x*Map.tile_size, obj.y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), obj.shadow)       
       if obj.typeid == 8
         @renderCanvas(@canvases.object_shadows, obj.x*Map.tile_size, obj.y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), obj.shadow)
 
     if obj.type == "player"
-
-      @clearCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size)
       @clearCanvas(obj.canvas, obj.oldX*Map.tile_size, obj.oldY*Map.tile_size, Map.tile_size, Map.tile_size)
 
       if Player.dir == "right"
@@ -105,7 +105,8 @@ window.Render =
         @renderCanvas(obj.canvas, obj.x*Map.tile_size, ((obj.y*Map.tile_size) + Map.tile_size) - Player.movecount, Map.tile_size, Map.tile_size, obj.texture)
       if Player.dir == "down"
         @renderCanvas(obj.canvas, obj.x*Map.tile_size, ((obj.y*Map.tile_size) - Map.tile_size) + Player.movecount, Map.tile_size, Map.tile_size, obj.texture)
-      if Player.dir == "none"  
+      if Player.dir == "none"
+        @clearCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size)
         @renderCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size, obj.texture)
 
         if (Map.dark == "start" && Map.complete == false) || (Map.dark == "end" && Map.complete == true) || Map.dark == "all"
