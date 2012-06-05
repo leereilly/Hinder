@@ -41,7 +41,7 @@ class Block
     Render.block_update Map.block_at(@x, @y), Map.next_block(@x, @y, dir), @type
     #@animate()
 
-class window.Enemy
+class @Enemy
   name: ""
   type: "enemy"
   x: 0
