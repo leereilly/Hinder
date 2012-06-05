@@ -9,5 +9,10 @@
 		<canvas height='<%= @canvassize %>' width='<%= @canvassize %>' id='viewfield'></canvas>
 		<canvas height='<%= @canvassize %>' width='<%= @canvassize %>' id='darkness'></canvas>
 		<canvas height='<%= @canvassize %>' width='<%= @canvassize %>' id='shadow_overlay'></canvas>
+		<div class="user-interface">
+			<%= request.fullpath %>
+			Moves:<span class="level-moves-user"></span><br />
+			Highscore: <span class="level-moves-highscore"></span>
+		</div>
 	</div>
 </div>

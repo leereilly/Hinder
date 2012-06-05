@@ -14,7 +14,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'sprockets'
-  gem 'compass', git: 'git://github.com/chriseppstein/compass', branch: 'master'
+  gem 'compass-rails'
   #gem 'compass'
   #gem 'compass-rails'
 end

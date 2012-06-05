@@ -1,13 +1,3 @@
-GIT
-  remote: git://github.com/chriseppstein/compass
-  revision: bbdb179df1571e1dae5abdf9bcacadaf99e5d8a3
-  branch: master
-  specs:
-    compass (0.12.rc.1.bbdb179)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -51,10 +41,16 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
+    compass (0.12.1)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    compass-rails (1.0.1)
+      compass (~> 0.12.0)
     erubis (2.7.0)
     execjs (1.3.0)
       multi_json (~> 1.0)
-    fssm (0.2.8.1)
+    fssm (0.2.9)
     heroku (2.20.0)
       launchy (>= 0.3.2)
       rest-client (~> 1.6.1)
@@ -135,7 +131,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.1.1)
-  compass!
+  compass-rails
   heroku
   jquery-rails
   pg

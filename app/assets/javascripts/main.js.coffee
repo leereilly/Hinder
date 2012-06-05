@@ -41,7 +41,7 @@ class Block
     Render.block_update Map.block_at(@x, @y), Map.next_block(@x, @y, dir), @type
     #@animate()
 
-class Enemy
+class window.Enemy
   name: ""
   type: "enemy"
   x: 0
@@ -60,15 +60,20 @@ class Enemy
 
   init: ->
     @animationSteps = [
+      Math.round(Map.tile_size * 0.9)
       Math.round(Map.tile_size * 0.8)
       Math.round(Map.tile_size * 0.6)
       Math.round(Map.tile_size * 0.4)
       Math.round(Map.tile_size * 0.2)
+      Math.round(Map.tile_size * 0.1)
+
     ]
-    console.log "Enemy loaded"
     @canvas = Render.canvases.main
     if @type == "enemy"
-      @texture = Resource.images.enemy.obj
+      if @moving == false
+        @texture = Resource.images.enemy_passive.obj
+      else
+        @texture = Resource.images.enemy.obj
     if @type == "rescue"
       @texture = Resource.images.rescue.obj
     
@@ -78,6 +83,7 @@ class Enemy
     @oldX = @x
     @oldY = @y
     @old_direction = "right"
+    console.log @moving
     @init()
   
   maketurn: (_turn) ->
@@ -112,7 +118,7 @@ class Enemy
       Map_block = Map.block_at(@x, num)
       if Map_block.type == 3
         @follows = true
-        console.log "Found player"
+        @texture = Resource.images.enemy_active.obj
       if Map_block.type > 0 && Map_block.type != 7
         num = -1
       num--
@@ -122,7 +128,7 @@ class Enemy
       Map_block = Map.block_at(@x, num)
       if Map_block.type == 3
         @follows = true
-        console.log "Found player"
+        @texture = Resource.images.enemy_active.obj
       if Map_block.type > 0 && Map_block.type != 7
         num = Map.tiles.length
       num++
@@ -132,7 +138,7 @@ class Enemy
       Map_block = Map.block_at(num, @y)
       if Map_block.type == 3
         @follows = true
-        console.log "Found player"
+        @texture = Resource.images.enemy_active.obj
       if Map_block.type > 0 && Map_block.type != 7
         num = -1
       num--
@@ -142,7 +148,7 @@ class Enemy
       Map_block = Map.block_at(num, @y)
       if Map_block.type == 3
         @follows = true
-        console.log "Found player"
+        @texture = Resource.images.enemy_active.obj
       if Map_block.type > 0 && Map_block.type != 7
         num = Map.tiles.length
       num++
@@ -265,7 +271,7 @@ window.Player =
       Math.round(Map.tile_size * 0.6)
       Math.round(Map.tile_size * 0.4)
       Math.round(Map.tile_size * 0.2)
-      #Math.round(Map.tile_size * 0.1)
+      Math.round(Map.tile_size * 0.1)
     ]
     console.log @animationSteps
     @oldX = @x
@@ -335,9 +341,5 @@ window.Player =
     return block.move dir
  
 jQuery ->
-  setTimeout ( =>
-		window.scrollTo(0, 1)
-  ), 0
-	
   Game.init()  
   return

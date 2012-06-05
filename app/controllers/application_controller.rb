@@ -14,6 +14,6 @@ class ApplicationController < ActionController::Base
  
   def iphone_request?
 	#request.subdomains.first == 'iphone'
-    request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"][/(Mobile\/.+Safari)/]
+    request.env["HTTP_USER_AGENT"] && request.user_agent.include?("iPhone")
   end 
 end

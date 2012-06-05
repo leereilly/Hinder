@@ -3,12 +3,6 @@ window.Render =
   init: ->
     @main_canvas = jQuery("#viewfield")[0]
 
-    #jQuery("#player")[0].width = 200
-    jQuery("#player")[0].style.width = '600px'
-    #jQuery("#player")[0].height = 200
-    jQuery("#player")[0].style.height = '600px'
-
-
     @canvases.dark = {context: jQuery("#darkness")[0].getContext("2d")} 
     @canvases.shadow_overlay = {context: jQuery("#shadow_overlay")[0].getContext("2d")} 
     @canvases.main = {context: jQuery("#viewfield")[0].getContext("2d")} 

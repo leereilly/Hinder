@@ -77,20 +77,21 @@ window.Game =
             Player.init(x,y)
     
     if Player.events == ""
-      $("#mainWrapper").touchwipe {
-        wipeLeft: ->
-          Player.move "left"
-          return
-        wipeRight: ->
-          Player.move "right"
-          return
-        wipeDown: ->
-          Player.move "up"
-          return
-        wipeUp: ->
-          Player.move "down"
-          return
-      }
+      if $("#mainWrapper").touchwipe
+        $("#mainWrapper").touchwipe {
+          wipeLeft: ->
+            Player.move "left"
+            return
+          wipeRight: ->
+            Player.move "right"
+            return
+          wipeDown: ->
+            Player.move "up"
+            return
+          wipeUp: ->
+            Player.move "down"
+            return
+        }
 
       $(document).keydown (e) ->
         if Player.locked == false
