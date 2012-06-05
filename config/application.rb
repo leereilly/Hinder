@@ -55,7 +55,7 @@ module Hinder
     #config.assets.precompile << 'brands/*.css'
     #config.assets.precompile += ['brands/*']
     #config.assets.precompile += ['partials/*.js']
-    config.assets.precompile += ['excanvas.compiled.js','jquery.touchwipe.1.1.1.js','main.js','map.js','render.js', 'resource.js','storage.js']
+    config.assets.precompile += ['*.css','excanvas.compiled.js','jquery.touchwipe.1.1.1.js','main.js', 'game_base.js','map.js','render.js', 'resource.js','storage.js']
     
     
   end
