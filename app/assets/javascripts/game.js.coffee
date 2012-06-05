@@ -1,4 +1,4 @@
-window.Game =
+@Game =
   step: 0
   levels: []
   init: ->
