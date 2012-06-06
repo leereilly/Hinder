@@ -322,7 +322,7 @@ window.Player =
     return
     
   animate: (step = @animationSteps.length) ->
-    if step >= 1     
+    if step >= 1 
       @movecount = @animationSteps[step] 
       requestAnimFrame(=> @animate(step))      
     else
