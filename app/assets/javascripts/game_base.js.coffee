@@ -220,7 +220,6 @@ class @Enemy
     return
 
   animate: (step = @animationSteps.length) ->
-    console.log @dir
     if step >= 1     
       @movecount = @animationSteps[step] 
       requestAnimFrame(=> @animate(step))      
@@ -229,6 +228,8 @@ class @Enemy
       @dir = "none"
       @movecount = 0
     step--
+
+    @movecount = 0 unless @movecount
     Render.object @ 
 
     return
@@ -329,7 +330,9 @@ window.Player =
     else
       @dir = "none"
       @movecount = 0
-      Game.cycle() 
+      Game.cycle()
+       
+    @movecount = 0 unless @movecount
     Render.object @ 
     step--
     return
