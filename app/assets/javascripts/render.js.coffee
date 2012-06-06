@@ -89,7 +89,8 @@ window.Render =
         @renderCanvas(@canvases.object_shadows, obj.x*Map.tile_size, obj.y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), obj.shadow)
 
     if obj.type == "player"
-      @clearCanvas(obj.canvas, obj.oldX*Map.tile_size, obj.oldY*Map.tile_size, Map.tile_size, Map.tile_size)
+      if obj.movecount < Map.tile_size
+        @clearCanvas(obj.canvas, obj.oldX*Map.tile_size, obj.oldY*Map.tile_size, Map.tile_size, Map.tile_size)
 
       if Player.dir == "right"
         @renderCanvas(obj.canvas, ((obj.x*Map.tile_size) + Player.movecount) - Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size, obj.texture)
@@ -111,7 +112,8 @@ window.Render =
             @clearCanvas @canvases.dark, 0, 0, @main_canvas.width, @main_canvas.height     
 
     if obj.type == "enemy" || obj.type == "rescue"
-      @clearCanvas(obj.canvas, obj.oldX*Map.tile_size, obj.oldY*Map.tile_size, Map.tile_size, Map.tile_size)
+      if obj.movecount < Map.tile_size
+        @clearCanvas(obj.canvas, obj.oldX*Map.tile_size, obj.oldY*Map.tile_size, Map.tile_size, Map.tile_size)
 
       if obj.dir == "right"
         @renderCanvas(obj.canvas, (((obj.x*Map.tile_size) + obj.movecount) - Map.tile_size)  + 3, (obj.y*Map.tile_size) + 3, Map.tile_size - 5, Map.tile_size - 5, obj.texture)

@@ -220,6 +220,7 @@ class @Enemy
     return
 
   animate: (step = @animationSteps.length) ->
+    console.log @dir
     if step >= 1     
       @movecount = @animationSteps[step] 
       requestAnimFrame(=> @animate(step))      
