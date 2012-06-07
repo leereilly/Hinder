@@ -364,7 +364,7 @@ window.Player =
     @enemies = []
     @markers = []
 
-    $.getJSON('../maps.json', @convertDataToMap)
+    $.getJSON('../test.json', @convertDataToMap)
 
     return
   
