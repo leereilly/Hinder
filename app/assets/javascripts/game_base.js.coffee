@@ -417,7 +417,7 @@ window.Player =
 
   submitScore: () ->
     if @highscore_moves > @moves
-      alert "New highscore with #{@moves} moves."
+      #alert "New highscore with #{@moves} moves."
       callback = (response) -> Game.nextLevel()
       jQuery.get './../highscore.js?level=' + Map.level + '&moves=' + @moves, {}, callback, 'json'
     else

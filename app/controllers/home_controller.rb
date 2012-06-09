@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
 	def index
 		@canvassize = 600
-		@canvassize = 650 unless @using_ipad.blank?
+		@canvassize = 600 unless @using_ipad.blank?
 		respond_to do |format|
 	  		format.html # index.html.erb
 	  		format.iphone {@canvassize = 495} #index.iphone.erb
