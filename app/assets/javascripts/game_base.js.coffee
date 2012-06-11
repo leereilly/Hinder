@@ -346,6 +346,7 @@ window.Player =
 
 @Map =
   level: ""
+  password: ""
   tile_size: 20
   tiles: []
   markers: []
@@ -375,16 +376,21 @@ window.Player =
     if not Map.level
       Map.level = Game.getLevel('level')
     if not Map.level
+      Map.level = Game.getLevel('pwd')
+    if not Map.level
       Map.level = Store.get "current level"
     if not Map.level
       Game.loadNew(data.map[0])
     else 
       for level in data.map 
-        if level.id ==  Map.level
+        if level.id ==  Map.level || level.password ==  Map.level
+          console.log level
           Game.loadNew(level)  
     return
   
   block_at: (x, y) ->
+    if y > 14
+      y = 14
     {type: @tiles[y][x], x: x, y: y}
     
   next_block: (x, y, dir) ->
@@ -402,6 +408,7 @@ window.Player =
     @highscore_moves = 1000
     @updateScore @moves, ".level-moves-user"
     callback = (response) -> Score.updateHighscore response
+    #jQuery.get './../highscore.js?level=' + Map.level, {}, callback, 'json'
     jQuery.get './../highscore.js?level=' + Map.level, {}, callback, 'json'
   
   changeStats: () ->
@@ -437,7 +444,11 @@ window.Player =
     Map.init()
   nextLevel: ->
     console.log "Next level"
-    Map.level = Map.exit.right
+
+    Map.level = Map.exit.right if Player.dir == "right"
+    Map.level = Map.exit.left if Player.dir == "left"
+    Map.level = Map.exit.up if Player.dir == "up"
+    Map.level = Map.exit.down if Player.dir == "down"
     Player.movecount = 0
     Player.dir = "none"
     Player.locked = false
@@ -452,13 +463,12 @@ window.Player =
     return
   loadNew: (mapdata) ->
     #@levels.push(mapdata)
-
-    window.history.pushState 'page2', 'Title', '/home/index?level=' + Map.level
+    #window.history.pushState 'page2', 'Title', '/home/index?level=' + Map.level
+    window.history.pushState 'page2', 'Title', '/home/index?pwd=' + mapdata.password
     Player.contact = false
 
     Store.set "current level", mapdata.id
     #Store.set "levels", @levels
-
     Map.overlay = if mapdata.overlay then mapdata.overlay else "shadow_overlay.png"
     Map.floor = if mapdata.floor then mapdata.floor else "shadow_map.png"
 

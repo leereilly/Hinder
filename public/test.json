@@ -2,6 +2,7 @@
     "map":[
     {
             "id":           "START2",
+            "password":     "1456",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "floor":        "shadow_map_start2.png",
@@ -31,6 +32,7 @@
     ]},
     {
             "id":           "ME0",
+            "password":     "4356",
             "dark":         "",
             "name":         "Detta är bara ett test",
 			"floor":        "shadow_map_me0.png",
@@ -59,6 +61,7 @@
     ]},
     {
             "id":           "ME1",
+            "password":     "9485",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -86,6 +89,7 @@
     ]},
     {
             "id":           "ME2",
+            "password":     "4556",
             "dark":        "",
             "name":         "Test nummer två",
             "exit": {
@@ -113,6 +117,7 @@
     ]},
     {
             "id":           "ME3",
+            "password":     "5432",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "floor":        "",
@@ -142,6 +147,7 @@
     ]},
     {
             "id":           "ME4",
+            "password":     "1445",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "floor":        "shadow_map_me4.png",
@@ -171,6 +177,7 @@
     ]},
     {
             "id":           "ME5",
+            "password":     "8546",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -198,6 +205,7 @@
     ]},    
     {
             "id":           "ME6",
+            "password":     "7654",
             "dark":         "",
             "name":         "Detta är bara ett test",
 			"floor":		"",
@@ -226,8 +234,10 @@
     ]},
     {
             "id":           "ME7",
+            "password":     "9586",
             "dark":         "",
             "name":         "Detta är bara ett test",
+            "floor":        "shadow_map_me7.png",
             "exit": {
                 "up":       "ME8",
                 "right":    "",
@@ -246,13 +256,14 @@
                 [1,1,0,1,1,1,1,1,1,1,0,1,1,1,1],
                 [1,1,0,1,1,1,1,1,1,1,9,1,1,1,1],
                 [1,1,0,1,1,1,1,1,1,1,9,1,1,1,1],
-                [1,0,0,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,0,0,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,0,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,0,1,1,1,1,1,1,1,1,1,1,1,1],
                 [1,1,4,1,1,1,1,1,1,1,1,1,1,1,1],
                 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     ]},    
     {
             "id":           "ME8",
+            "password":     "8689",
             "dark":         "end",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -280,6 +291,7 @@
     ]},
     {
             "id":           "ME9",
+            "password":     "9586",
             "dark":         "start",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -307,6 +319,7 @@
     ]},
     {
             "id":           "ME10",
+            "password":     "4543",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -334,6 +347,7 @@
     ]},
     {
             "id":           "ME11",
+            "password":     "2854",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -361,6 +375,7 @@
     ]},
     {
             "id":           "ME12",
+            "password":     "8789",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -388,6 +403,7 @@
     ]},
     {
             "id":           "ME13",
+            "password":     "4354",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -415,11 +431,12 @@
     ]},
     {
             "id":           "ME14",
+            "password":     "1689",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
                 "up":       "",
-                "right":    "",
+                "right":    "ME15",
                 "left":     "",
                 "down":     ""
                 },
@@ -441,7 +458,36 @@
                 [1,1,1,1,1,1,1,1,1,3,1,1,1,1,1]
     ]},
     {
+            "id":           "ME15",
+            "password":     "3697",
+            "dark":         "",
+            "name":         "Detta är bara ett test",
+            "exit": {
+                "up":       "JS9",
+                "right":    "",
+                "left":     "",
+                "down":     ""
+                },
+            "tile":[
+                [1,1,1,1,1,1,1,1,1,8,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,0,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,0,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,0,1,1,1,1,1],
+                [3,0,0,0,0,0,0,0,0,0,1,1,1,1,1],
+                [1,1,1,1,2,2,2,2,1,1,1,1,1,1,1],
+                [1,1,1,0,5,0,5,0,0,1,1,1,1,1,1],
+                [1,1,1,1,5,0,5,0,5,1,1,1,1,1,1],
+                [1,1,1,1,0,9,9,5,0,1,1,1,1,1,1],
+                [1,1,1,1,9,1,1,9,0,1,1,1,1,1,1],
+                [1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,0,0,6,0,6,0,0,0,10,0,0,0],
+                [1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,0,1,1,1,1,1,1,1,1,1,1,1]
+    ]},
+    {
             "id":           "JS1",
+            "password":     "9798",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -469,6 +515,7 @@
     ]},
      {
             "id":           "JS2",
+            "password":     "9213",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -496,6 +543,7 @@
     ]},
     {
             "id":           "JS3",
+            "password":     "9697",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -523,6 +571,7 @@
     ]},
     {
             "id":           "JS4",
+            "password":     "9923",
             "dark":         "end",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -550,6 +599,7 @@
     ]},
     {
             "id":           "JS5",
+            "password":     "6684",
             "dark":         "start",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -577,6 +627,7 @@
     ]},
     {
             "id":           "JS6",
+            "password":     "2457",
             "dark":         "end",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -604,6 +655,7 @@
     ]},
     {
             "id":           "JS7",
+            "password":     "9697",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -631,8 +683,10 @@
     ]},
     {
             "id":           "JS8",
+            "password":     "9694",
             "dark":         "",
             "name":         "Detta är bara ett test",
+            "floor":        "shadow_map_js8.png",
             "exit": {
                 "up":       "ME11",
                 "right":    "JS4",
@@ -658,13 +712,14 @@
     ]},
     {
             "id":           "JS9",
+            "password":     "2145",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
                 "up":       "",
                 "right":    "",
                 "left":     "",
-                "down":     "ME2"
+                "down":     ""
                 },
             "tile":[
                 [1,1,1,1,1,1,1,1,1,1,1,1,8,1,1],
@@ -680,11 +735,12 @@
                 [1,0,1,0,1,1,1,0,1,1,1,0,1,0,1],
                 [1,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
                 [1,1,1,2,1,1,1,5,1,1,1,1,1,6,1],
-                [3,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                [1,1,1,1,1,1,1,1,1,3,1,1,1,1,1]
     ]},
     {
             "id":           "JS10",
+            "password":     "1845",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -712,10 +768,11 @@
     ]},
     {
             "id":           "JS11",
+            "password":     "9556",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
-                "up":       "ME14",
+                "up":       "JS14",
                 "right":    "",
                 "left":     "",
                 "down":     ""
@@ -739,6 +796,7 @@
     ]},
     {
             "id":           "JS12",
+            "password":     "1265",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -762,17 +820,18 @@
                 [1,0,2,5,0,0,0,0,0,5,0,0,1,1,1],
                 [1,0,2,0,0,1,1,1,1,1,0,0,1,1,1],
                 [1,1,0,0,0,1,1,1,1,1,0,0,1,1,1],
-                [1,1,0,1,1,1,1,1,1,1,1,1,1,1,1]
+                [1,1,8,1,1,1,1,1,1,1,1,1,1,1,1]
     ]},
     {
             "id":           "JS13",
+            "password":     "9697",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "floor":        "shadow_map_js13.png",
             "overlay":      "shadow_overlay_js13.png",
             "exit": {
                 "up":       "",
-                "right":    "",
+                "right":    "JS15",
                 "left":     "",
                 "down":     ""
                 },
@@ -795,6 +854,7 @@
     ]},
     {
             "id":           "JS14",
+            "password":     "7783",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -822,6 +882,7 @@
     ]},
     {
             "id":           "JS15",
+            "password":     "1356",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -833,7 +894,7 @@
             "tile":[
                 [1,1,1,1,1,1,1,8,1,1,1,1,1,1,1],
                 [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                [1,0,1,1,1,1,1,7,1,1,1,1,1,0,1],
+                [3,0,1,1,1,1,1,7,1,1,1,1,1,0,1],
                 [1,0,9,9,9,5,0,0,0,0,1,1,1,0,1],
                 [1,0,1,1,1,1,1,0,0,0,1,1,1,6,1],
                 [1,0,1,1,1,1,1,0,1,1,1,1,1,0,1],
@@ -845,10 +906,11 @@
                 [1,0,0,0,0,0,0,0,0,2,0,0,0,0,1],
                 [1,0,1,1,1,1,1,7,1,1,1,1,1,0,1],
                 [1,0,0,0,0,0,0,0,0,0,0,0,9,0,1],
-                [1,1,1,1,1,1,1,3,1,1,1,1,1,1,1]
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     ]},
     {
             "id":           "JS15B",
+            "password":     "3385",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -876,6 +938,7 @@
     ]},
     {
             "id":           "ME99",
+            "password":     "1234",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
@@ -903,6 +966,7 @@
     ]},
     {
             "id":           "ME98",
+            "password":     "2345",
             "dark":         "",
             "name":         "Detta är bara ett test",
             "exit": {
