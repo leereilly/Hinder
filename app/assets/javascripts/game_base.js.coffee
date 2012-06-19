@@ -83,7 +83,6 @@ class @Enemy
     @oldX = @x
     @oldY = @y
     @old_direction = "right"
-    console.log @moving
     @init()
   
   maketurn: (_turn) ->
@@ -275,7 +274,6 @@ window.Player =
       Math.round(Map.tile_size * 0.2)
       Math.round(Map.tile_size * 0.1)
     ]
-    console.log @animationSteps
     @oldX = @x
     @oldY = @y
     @canvas = Render.canvases.player
@@ -384,7 +382,6 @@ window.Player =
     else 
       for level in data.map 
         if level.id ==  Map.level || level.password ==  Map.level
-          console.log level
           Game.loadNew(level)  
     return
   
@@ -442,9 +439,8 @@ window.Player =
   init: ->
     @level = Store.get "levels"
     Map.init()
+		
   nextLevel: ->
-    console.log "Next level"
-
     Map.level = Map.exit.right if Player.dir == "right"
     Map.level = Map.exit.left if Player.dir == "left"
     Map.level = Map.exit.up if Player.dir == "up"
@@ -597,7 +593,6 @@ window.Player =
     return
     
   pause: ->
-    console.log "stopped "
     return
 
 jQuery ->
