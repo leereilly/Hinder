@@ -595,7 +595,7 @@ window.Player =
     jQuery(".notice").css 'left', notice.x
     jQuery(".notice").css 'top', notice.y
     jQuery(".notice").html(jQuery(".notice").html() + notice.text)
-    jQuery(".notice").show()
+    jQuery(".notice").fadeIn("slow")
     return
 
 
