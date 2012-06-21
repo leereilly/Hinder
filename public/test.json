@@ -4,7 +4,11 @@
             "id":           "START2",
             "password":     "1456",
             "dark":         "",
-            "name":         "Detta är bara ett test",
+            "note":         {
+                "x":    70,
+                "y":    400,
+                "text": "The URL in the address bar always points to the current level."
+            },
             "floor":        "shadow_map_start2.png",
             "overlay":      "",
             "exit": {
@@ -64,6 +68,11 @@
             "password":     "9485",
             "dark":         "",
             "name":         "Detta är bara ett test",
+            "note":         {
+                "x":    70,
+                "y":    30,
+                "text":"Reload the page at any time to restart level (if you get stuck)."
+            },
             "exit": {
                 "up":       "",
                 "right":    "ME2",
@@ -234,9 +243,14 @@
     ]},
     {
             "id":           "ME7",
-            "password":     "9586",
+            "password":     "9506",
             "dark":         "",
             "name":         "Detta är bara ett test",
+            "note":         {
+                "x":    170,
+                "y":    450,
+                "text": "Hey! You've completed a third of the game so far.<br />Keep it up!"
+            },
             "floor":        "shadow_map_me7.png",
             "exit": {
                 "up":       "ME8",

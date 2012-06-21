@@ -84,7 +84,7 @@ window.Render =
       if obj.typeid == 2
         @renderCanvas(@canvases.object_shadows, obj.x*Map.tile_size, obj.y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), obj.shadow) if obj.shadow
       if obj.typeid == 5
-        @renderCanvas(@canvases.object_shadows, obj.x*Map.tile_size, (obj.y*Map.tile_size) - 1,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), obj.shadow)       
+        @renderCanvas(@canvases.object_shadows, obj.x*Map.tile_size, (obj.y*Map.tile_size) - 2,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2) + 1, obj.shadow)       
       if obj.typeid == 8
         @renderCanvas(@canvases.object_shadows, obj.x*Map.tile_size, obj.y*Map.tile_size,Map.tile_size + (Map.tile_size / 4),Map.tile_size +  (Map.tile_size / 2), obj.shadow)
 

@@ -1,10 +1,13 @@
 Hinder::Application.routes.draw do
   #root :to => "home#index"
-  #match '/' => 'home#index'
   resources :highscore
+  match '/' => 'home#index'
+  match '/:level' => 'home#index'
   #resources :home
-
-  root :to => 'home#index'
+  #namespace :level do
+  #  get "home/index"
+  #match '/' => 'home#index'
+  #root :to => 'home#index'
   get "home/index"
 
   # The priority is based upon order of creation:

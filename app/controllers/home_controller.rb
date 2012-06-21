@@ -2,8 +2,10 @@ class HomeController < ApplicationController
   	before_filter :detect_device_request
 
 	def index
-		@canvassize = 600
+		@start_note = "False."
+		@canvassize = 570
 		@canvassize = 645 unless @using_ipad.blank?
+		@start_note = "Swipe to move." if not @using_ipad.blank? and not @using_iphone.blank?
 		respond_to do |format|
 	  		format.html # index.html.erb
 	  		format.iphone {@canvassize = 495} #index.iphone.erb
