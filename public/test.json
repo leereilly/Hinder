@@ -4,7 +4,11 @@
             "id":           "START2",
             "password":     "1456",
             "dark":         "",
-            "name":         "Detta är bara ett test",
+            "note":         {
+                "x":    "100",
+                "y":    "100",
+                "text":"The URL in the address bar always points to the current level.<br />Reload the page at any time to restart level (if you get stuck)."
+            },
             "floor":        "shadow_map_start2.png",
             "overlay":      "",
             "exit": {

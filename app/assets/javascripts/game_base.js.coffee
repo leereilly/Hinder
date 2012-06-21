@@ -83,7 +83,6 @@ class @Enemy
     @oldX = @x
     @oldY = @y
     @old_direction = "right"
-    console.log @moving
     @init()
   
   maketurn: (_turn) ->
@@ -247,10 +246,7 @@ class @Enemy
 
     return false if (map_block.type != 2 && map_block.type != 5)
     block = new Block(map_block.x, map_block.y, map_block.type)
-    return block.move dir
-    #map_block = Map.next_block(@x, @y, dir)
-    #return false if map_block.type == 1
-    #return true if map_block.type == 0       
+    return block.move dir      
         
 window.Player =
   name: "Player_1"
@@ -275,7 +271,6 @@ window.Player =
       Math.round(Map.tile_size * 0.2)
       Math.round(Map.tile_size * 0.1)
     ]
-    console.log @animationSteps
     @oldX = @x
     @oldY = @y
     @canvas = Render.canvases.player
@@ -288,20 +283,16 @@ window.Player =
     return false if @contact == true
     @dir = dir
     if (@y == 0 && @dir == "up" && Map.exit.up != "")
-      Map.level = Map.exit.up
       Game.nextLevel()
       return
     if (@y == 14 && @dir == "down" && Map.exit.down != "")
-      Map.level = Map.exit.down
       Game.nextLevel()
       return
     if (@x == 0 && @dir == "left" && Map.exit.left != "")
-      Map.level = Map.exit.left
       Game.nextLevel()
       return
     if (@x == 14 && @dir == "right" && Map.exit.right != "")
-      Score.submitScore()
-      @locked = false
+      Game.nextLevel()
       return
 
     if @collision @dir
@@ -345,6 +336,7 @@ window.Player =
     return block.move dir
 
 @Map =
+  level_id: ""
   level: ""
   password: ""
   tile_size: 20
@@ -384,7 +376,6 @@ window.Player =
     else 
       for level in data.map 
         if level.id ==  Map.level || level.password ==  Map.level
-          console.log level
           Game.loadNew(level)  
     return
   
@@ -405,11 +396,10 @@ window.Player =
   highscore_moves: 0
   init: ->
     @moves = 0
-    @highscore_moves = 1000
+    @highscore_moves = 2000
     @updateScore @moves, ".level-moves-user"
     callback = (response) -> Score.updateHighscore response
-    #jQuery.get './../highscore.js?level=' + Map.level, {}, callback, 'json'
-    jQuery.get './../highscore.js?level=' + Map.level, {}, callback, 'json'
+    jQuery.get './../highscore.js?level=' + Map.level_id, {}, callback, 'json'
   
   changeStats: () ->
     @moves++
@@ -422,14 +412,9 @@ window.Player =
     else
       @updateScore "-", ".level-moves-highscore"
 
-  submitScore: () ->
+  submitScore: (level) ->
     if @highscore_moves > @moves
-      #alert "New highscore with #{@moves} moves."
-      callback = (response) -> Game.nextLevel()
-      jQuery.get './../highscore.js?level=' + Map.level + '&moves=' + @moves, {}, callback, 'json'
-    else
-      Game.nextLevel()
-
+      jQuery.get './../highscore.js?level=' + level + '&moves=' + @moves, {}, 'json'
   
   updateScore: (score,element_class) ->
     jQuery(element_class).html(score)
@@ -443,8 +428,7 @@ window.Player =
     @level = Store.get "levels"
     Map.init()
   nextLevel: ->
-    console.log "Next level"
-
+    Score.submitScore(Map.level_id)
     Map.level = Map.exit.right if Player.dir == "right"
     Map.level = Map.exit.left if Player.dir == "left"
     Map.level = Map.exit.up if Player.dir == "up"
@@ -464,11 +448,12 @@ window.Player =
   loadNew: (mapdata) ->
     #@levels.push(mapdata)
     #window.history.pushState 'page2', 'Title', '/home/index?level=' + Map.level
-    window.history.pushState 'page2', 'Title', '/home/index?pwd=' + mapdata.password
+    Map.level_id =  mapdata.id
+    window.history.pushState 'page2', 'Title', '?pwd=' + mapdata.password
+    #window.history.pushState 'page2', 'Title', '/home/index?pwd=' + mapdata.password
     Player.contact = false
 
     Store.set "current level", mapdata.id
-    #Store.set "levels", @levels
     Map.overlay = if mapdata.overlay then mapdata.overlay else "shadow_overlay.png"
     Map.floor = if mapdata.floor then mapdata.floor else "shadow_map.png"
 
@@ -476,7 +461,11 @@ window.Player =
       Render.init()
 
       Score.init()
-
+      if mapdata.note
+        Game.show_notice(mapdata.note)
+      else
+        jQuery(".notice").hide()
+        
       Map.tiles = mapdata.tile
       Map.dark = mapdata.dark
       Map.exit = mapdata.exit
@@ -599,6 +588,11 @@ window.Player =
   pause: ->
     console.log "stopped "
     return
+
+  show_notice: (notice) ->
+    jQuery(".notice").html(notice.text)
+    return
+
 
 jQuery ->
   Game.init()  
