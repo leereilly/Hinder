@@ -7,6 +7,7 @@ body
   background-repeat: no-repeat
   background-attachment: fixed
   text-align: center
+  font-family: ‘Trebuchet MS’, Helvetica, sans-serif
   //background-image: -webkit-radial-gradient(circle, rgba(0,0,0,0.01), rgba(0,0,0,0.3)), url('textures/page_bg.png')
   +background(url('textures/page_bg.png'))
 
@@ -40,9 +41,24 @@ body
   margin:  0 auto
   margin-top: 2%
   border: 0px solid black
-  -moz-box-shadow: 0px 0px 50px #000
-  -webkit-box-shadow: 0px 0px 50px #000
-  box-shadow: 0px 0px 50px #000
+  +box-shadow(rgba(black, 0.8) 0px 0px 50px)
+
+.notice
+  position: absolute
+  left: 30px
+  top: 400px
+  padding: 5px
+  color: white 
+  background-color: #777
+  color: #EEE
+  border: 1px solid #555
+  line-height: 2em
+  font-size: 1em
+  +border-radius(5px)
+  +opacity(0.8)
+  +box-shadow(rgba(black, 0.5) 2px 2px 5px)
+  +text-shadow(rgba(black, 0.5) 1px 1px 2px)
+  display: none
 
 .user-interface
   position: absolute
