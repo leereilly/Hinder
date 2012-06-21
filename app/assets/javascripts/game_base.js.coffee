@@ -430,6 +430,7 @@ window.Player =
     Map.init()
 		
   nextLevel: ->
+    Player.locked = true
     jQuery(".notice").html("")
     Score.submitScore(Map.level_id) 
     Map.level = Map.exit.right if Player.dir == "right"
@@ -438,7 +439,6 @@ window.Player =
     Map.level = Map.exit.down if Player.dir == "down"
     Player.movecount = 0
     Player.dir = "none"
-    Player.locked = false
     Map.enemies = []
     Map.markers = []
     Map.complete = false
@@ -464,6 +464,9 @@ window.Player =
       Render.init()
 
       Score.init()
+
+      Player.locked = false
+
       if mapdata.note
         Game.show_notice(mapdata.note)
       else
