@@ -5,6 +5,7 @@ window.Resource =
             wall_3: {path: "/assets/textures/wall_3.jpg", loaded: "false"},
             door: {path: "/assets/textures/door.png", loaded: "false"},
             player: {path: "/assets/textures/player_low.png", loaded: "false"},
+            player_low: {path: "/assets/textures/player_low_low.png", loaded: "false"},
             enemy: {path: "/assets/textures/monster.png", loaded: "false"},
             enemy_active: {path: "/assets/textures/monster_active_low.png", loaded: "false"},
             enemy_passive: {path: "/assets/textures/monster_passive.png", loaded: "false"},

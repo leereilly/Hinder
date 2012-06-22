@@ -28,9 +28,11 @@ class window.Marker
 class Block
   movecount: 0
   constructor: (@x, @y, @type) ->
-  move: (dir) ->
+  move: (dir, trigger_object) ->
     return false if @obstructed(dir)
-    @move_block(@x, @y, dir)    
+    @move_block(@x, @y, dir) 
+
+    trigger_object.fast_animate = true
     return true    
   obstructed: (dir) ->
     Map.next_block(@x, @y, dir).type != 0
@@ -50,7 +52,8 @@ class @Enemy
   oldY: 2
   movecount: 0
   dir: "none"
-  old_direction = "none"
+  fast_animate: false
+  old_direction: "none"
   movestate: 0
   distY: 0
   distX: 0
@@ -64,8 +67,8 @@ class @Enemy
       Math.round(Map.tile_size * 0.8)
       Math.round(Map.tile_size * 0.6)
       Math.round(Map.tile_size * 0.4)
-      Math.round(Map.tile_size * 0.2)
-      Math.round(Map.tile_size * 0.1)
+      #Math.round(Map.tile_size * 0.2)
+      #Math.round(Map.tile_size * 0.1)
 
     ]
     @canvas = Render.canvases.main
@@ -192,6 +195,7 @@ class @Enemy
     
     
   move: (dir) ->
+    @fast_animate = false
     @dir = dir
 
     if @collision @dir
@@ -226,6 +230,7 @@ class @Enemy
       @old_direction = @dir
       @dir = "none"
       @movecount = 0
+    step-- if @fast_animate == true
     step--
 
     @movecount = 0 unless @movecount
@@ -246,7 +251,7 @@ class @Enemy
 
     return false if (map_block.type != 2 && map_block.type != 5)
     block = new Block(map_block.x, map_block.y, map_block.type)
-    return block.move dir      
+    return block.move dir, @      
         
 window.Player =
   name: "Player_1"
@@ -258,6 +263,7 @@ window.Player =
   movecount: 0
   dir: "none"
   events: ""
+  fast_animate: false
   locked: false
   contact: false
   animationSteps: []
@@ -268,19 +274,22 @@ window.Player =
       Math.round(Map.tile_size * 0.8)
       Math.round(Map.tile_size * 0.6)
       Math.round(Map.tile_size * 0.4)
-      Math.round(Map.tile_size * 0.2)
-      Math.round(Map.tile_size * 0.1)
+      #Math.round(Map.tile_size * 0.2)
+      #Math.round(Map.tile_size * 0.1)
     ]
     @oldX = @x
     @oldY = @y
     @canvas = Render.canvases.player
-    @texture = Resource.images.player.obj    
+    @texture = Resource.images.player.obj 
+    @texture_high = Resource.images.player.obj
+    @texture_low = Resource.images.player_low.obj
     Render.object @
   unlock: () ->
     @locked = false
 
   move: (dir) ->
-    jQuery(".notice").fadeOut("slow")
+    @fast_animate = false
+    jQuery(".notice").fadeOut("fast")
     return false if @contact == true
     @dir = dir
     if (@y == 0 && @dir == "up" && Map.exit.up != "")
@@ -317,15 +326,18 @@ window.Player =
     
   animate: (step = @animationSteps.length) ->
     if step >= 1 
+      @texture = @texture_low
       @movecount = @animationSteps[step] 
       requestAnimFrame(=> @animate(step))      
     else
+      @texture = @texture_high
       @dir = "none"
       @movecount = 0
       Game.cycle()
        
     @movecount = 0 unless @movecount
-    Render.object @ 
+    Render.object @
+    step-- if @fast_animate == true
     step--
     return
     
@@ -334,7 +346,8 @@ window.Player =
     return true if map_block.type == 0
     return false if (map_block.type != 2 && map_block.type != 5)
     block = new Block(map_block.x, map_block.y, map_block.type)
-    return block.move dir
+    #console.log block.move dir
+    return block.move dir, @
 
 @Map =
   level_id: ""
@@ -432,7 +445,7 @@ window.Player =
   nextLevel: ->
     Player.locked = true
     jQuery(".notice").html("")
-    Score.submitScore(Map.level_id) 
+    #Score.submitScore(Map.level_id) 
     Map.level = Map.exit.right if Player.dir == "right"
     Map.level = Map.exit.left if Player.dir == "left"
     Map.level = Map.exit.up if Player.dir == "up"
@@ -463,7 +476,7 @@ window.Player =
     Resource.preload =>
       Render.init()
 
-      Score.init()
+      #Score.init()
 
       Player.locked = false
 
@@ -559,7 +572,7 @@ window.Player =
     ), 20
     
   cycle: ->
-    Score.changeStats()
+    #Score.changeStats()
     Player.locked = true
     placed_blocks = 0
 
@@ -598,7 +611,7 @@ window.Player =
     jQuery(".notice").css 'left', notice.x
     jQuery(".notice").css 'top', notice.y
     jQuery(".notice").html(jQuery(".notice").html() + notice.text)
-    jQuery(".notice").fadeIn("slow")
+    jQuery(".notice").fadeIn("fast")
     return
 
 
