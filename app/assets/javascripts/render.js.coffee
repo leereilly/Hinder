@@ -10,6 +10,7 @@ window.Render =
     @canvases.wall_shadows = {context: jQuery("#wall_shadows")[0].getContext("2d")} 
     @canvases.object_shadows = {context: jQuery("#object_shadows")[0].getContext("2d")} 
     @canvases.player = {context: jQuery("#player")[0].getContext("2d")} 
+    @canvases.enemies = {context: jQuery("#enemies")[0].getContext("2d")}
     @canvases.markers = {context: jQuery("#markers")[0].getContext("2d")}
     
     @special_block_shadow_width = Math.round(Map.tile_size + (Map.tile_size / 4))
@@ -116,7 +117,7 @@ window.Render =
 
     if obj.type == "enemy" || obj.type == "rescue"
       if obj.movecount < Map.tile_size * 0.75
-        @clearCanvas(obj.canvas, obj.oldX*Map.tile_size, obj.oldY*Map.tile_size, Map.tile_size, Map.tile_size)
+        @clearCanvas(obj.canvas, (obj.oldX*Map.tile_size) - 10, (obj.oldY*Map.tile_size) - 10, Map.tile_size + 20, Map.tile_size + 20)
         
       if obj.dir == "right"
         @renderCanvas(obj.canvas, (((obj.x*Map.tile_size) + obj.movecount) - Map.tile_size)  + 3, (obj.y*Map.tile_size) + 3, Map.tile_size - 5, Map.tile_size - 5, obj.texture)

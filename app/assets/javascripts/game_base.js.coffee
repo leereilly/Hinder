@@ -71,7 +71,7 @@ class @Enemy
       #Math.round(Map.tile_size * 0.1)
 
     ]
-    @canvas = Render.canvases.main
+    @canvas = Render.canvases.enemies
     if @type == "enemy"
       if @moving == false
         @texture = Resource.images.enemy_passive.obj
