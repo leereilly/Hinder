@@ -569,7 +569,7 @@ window.Player =
     setTimeout ( =>
       Map.enemies[i - 1].maketurn 0
       @move_enemy(i) if --i
-    ), 20
+    ), 15
     
   cycle: ->
     #Score.changeStats()
@@ -601,7 +601,7 @@ window.Player =
     @step++
     setTimeout ( ->
       Player.unlock()
-    ), 20
+    ), 50
     return
     
   pause: ->
