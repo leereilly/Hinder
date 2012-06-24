@@ -529,16 +529,16 @@ window.Player =
       if $("body").touchwipe
         $("body").touchwipe {
           wipeLeft: ->
-            Player.move "left"
+            Player.move "left" if Player.locked == false
             return
           wipeRight: ->
-            Player.move "right"
+            Player.move "right" if Player.locked == false
             return
           wipeDown: ->
-            Player.move "up"
+            Player.move "up" if Player.locked == false
             return
           wipeUp: ->
-            Player.move "down"
+            Player.move "down" if Player.locked == false
             return
         }
 
