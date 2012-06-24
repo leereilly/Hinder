@@ -288,20 +288,25 @@ window.Player =
     @locked = false
 
   move: (dir) ->
+    Player.locked = true
     @fast_animate = false
     jQuery(".notice").fadeOut("fast")
     return false if @contact == true
     @dir = dir
     if (@y == 0 && @dir == "up" && Map.exit.up != "")
+      Render.clearCanvas(@canvas, @x*Map.tile_size, @y*Map.tile_size, Map.tile_size, Map.tile_size)
       Game.nextLevel()
       return
     if (@y == 14 && @dir == "down" && Map.exit.down != "")
+      Render.clearCanvas(@canvas, @x*Map.tile_size, @y*Map.tile_size, Map.tile_size, Map.tile_size)
       Game.nextLevel()
       return
     if (@x == 0 && @dir == "left" && Map.exit.left != "")
+      Render.clearCanvas(@canvas, @x*Map.tile_size, @y*Map.tile_size, Map.tile_size, Map.tile_size)
       Game.nextLevel()
       return
     if (@x == 14 && @dir == "right" && Map.exit.right != "")
+      Render.clearCanvas(@canvas, @x*Map.tile_size, @y*Map.tile_size, Map.tile_size, Map.tile_size)
       Game.nextLevel()
       return
 
@@ -544,7 +549,6 @@ window.Player =
 
       $(document).keydown (e) ->
         if Player.locked == false
-          Player.locked = true
           Player.move "right" if e.keyCode == 39  
           Player.move "left" if e.keyCode == 37 
           Player.move "down" if e.keyCode == 40           

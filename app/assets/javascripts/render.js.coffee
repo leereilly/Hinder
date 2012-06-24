@@ -95,7 +95,8 @@ window.Render =
     if obj.type == "player"
       if obj.movecount < Map.tile_size * 0.75
         @clearCanvas(obj.canvas, obj.oldX*Map.tile_size, obj.oldY*Map.tile_size, Map.tile_size, Map.tile_size)
-
+      if Player.dir == "hidden"
+        @clearCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size)
       if Player.dir == "right"
         @renderCanvas(obj.canvas, ((obj.x*Map.tile_size) + Player.movecount) - Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size, obj.texture)
       if Player.dir == "left" 
