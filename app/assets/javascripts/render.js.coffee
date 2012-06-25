@@ -62,7 +62,7 @@ window.Render =
           if is_render == false
             @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,shadow_x,shadow_y, Resource.images.block_shadow.obj)  
         if block == 5
-          @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,shadow_x,shadow_y, Resource.images.crate_shadow.obj)    
+          @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size - 1,shadow_x,shadow_y, Resource.images.crate_shadow.obj)    
         if block == 8
           @renderCanvas(@canvases.object_shadows, x*Map.tile_size, y*Map.tile_size,shadow_x,shadow_y, Resource.images.door_shadow.obj)  
     return

@@ -48,7 +48,7 @@ body
   border: 0px solid black
   +box-shadow(rgba(black, 0.8) 0px 0px 50px)
 
-.notice
+.notice, .bubble
   position: absolute
   left: 30px
   top: 400px
@@ -64,6 +64,11 @@ body
   +box-shadow(rgba(black, 0.5) 2px 2px 5px)
   +text-shadow(rgba(black, 0.5) 1px 1px 2px)
   display: none
+
+.bubble
+  background-color: #EEE
+  color: #333
+  +border-bottom-right-radius(0px)
 
 .user-interface
   position: absolute

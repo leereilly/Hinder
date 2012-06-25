@@ -28,6 +28,7 @@ class window.Marker
 class Block
   movecount: 0
   constructor: (@x, @y, @type) ->
+    Game.run_marker_check = true
   move: (dir, trigger_object) ->
     return false if @obstructed(dir)
     @move_block(@x, @y, dir) 
@@ -289,6 +290,7 @@ window.Player =
   move: (dir) ->
     Player.locked = true
     @fast_animate = false
+    jQuery(".bubble").fadeOut("fast")
     jQuery(".notice").fadeOut("fast")
     return false if @contact == true
     @dir = dir
@@ -442,6 +444,7 @@ window.Player =
 @Game =
   step: 0
   levels: []
+  run_marker_check: false
   init: ->
     @level = Store.get "levels"
     Map.init()
@@ -483,6 +486,11 @@ window.Player =
       #Score.init()
 
       Player.locked = false
+
+      if mapdata.bubble
+        Game.show_bubble(mapdata.bubble)
+      else
+        jQuery(".bubble").hide()
 
       if mapdata.note
         Game.show_notice(mapdata.note)
@@ -571,16 +579,26 @@ window.Player =
   move_enemy: (i) ->
     setTimeout ( =>
       Map.enemies[i - 1].maketurn 0
+      @check_markers() if @run_marker_check == true
       @move_enemy(i) if --i
-    ), 30
+    ), 20
     
   cycle: ->
     #Score.changeStats()
     Player.locked = true
-    placed_blocks = 0
 
     @move_enemy(Map.enemies.length) if Map.enemies.length > 0
-      
+    
+    @check_markers() if @run_marker_check == true
+
+    @step++
+    setTimeout ( ->
+      Player.unlock()
+    ), 70
+    return
+
+  check_markers: ->
+    placed_blocks = 0
     for marker in Map.markers
       marker.checkblock()
       if marker.occupied == true
@@ -600,15 +618,17 @@ window.Player =
             Render.clearCanvas(Render.canvases.main, x*Map.tile_size, y*Map.tile_size, Map.tile_size, Map.tile_size)
             Render.block_update({x: x, y: y},{x: x, y: y}, 8)
     else
-      Map.complete = false     
-    @step++
-    setTimeout ( ->
-      Player.unlock()
-      #console.log "test"
-    ), 90
-    return
+      Map.complete = false 
+    @run_marker_check = false
     
   pause: ->
+    return
+
+  show_bubble: (notice) ->
+    jQuery(".bubble").css 'left', notice.x
+    jQuery(".bubble").css 'top', notice.y
+    jQuery(".bubble").html(jQuery(".bubble").html() + notice.text)
+    jQuery(".bubble").fadeIn("fast")
     return
 
   show_notice: (notice) ->
