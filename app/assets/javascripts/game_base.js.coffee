@@ -488,6 +488,7 @@ window.Player =
 
       Player.locked = false
       jQuery(".ajax-loader").hide()
+      @step = 0
 
       if mapdata.bubble
         Game.speech = mapdata.bubble
