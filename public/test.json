@@ -41,9 +41,10 @@
             "name":         "Detta är bara ett test",
 			"floor":        "shadow_map_me0.png",
             "bubble":         {
-                "x":    60,
+                "step": 4,
+                "x":    200,
                 "y":    100,
-                "text": "What's that sound?"
+                "text": "What is happening?!"
             },
             "exit": {
                 "up":       "",
@@ -628,8 +629,9 @@
             "dark":         "",
             "name":         "Detta är bara ett test",
             "bubble":         {
-                "x":    450,
-                "y":    120,
+                "step": 1,
+                "x":    500,
+                "y":    110,
                 "text": "Help!"
             },
             "exit": {

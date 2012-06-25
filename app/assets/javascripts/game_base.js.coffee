@@ -469,6 +469,7 @@ window.Player =
     #Map.init()
     return
   loadNew: (mapdata) ->
+    jQuery(".ajax-loader").show()
     #@levels.push(mapdata)
     #window.history.pushState 'page2', 'Title', '/home/index?level=' + Map.level
     Map.level_id =  mapdata.id
@@ -486,10 +487,12 @@ window.Player =
       #Score.init()
 
       Player.locked = false
+      jQuery(".ajax-loader").hide()
 
       if mapdata.bubble
-        Game.show_bubble(mapdata.bubble)
+        Game.speech = mapdata.bubble
       else
+        Game.speech = null
         jQuery(".bubble").hide()
 
       if mapdata.note
@@ -592,6 +595,10 @@ window.Player =
     @check_markers() if @run_marker_check == true
 
     @step++
+
+    if Game.speech && @step == Game.speech.step
+      Game.show_bubble(Game.speech)
+
     setTimeout ( ->
       Player.unlock()
     ), 70
