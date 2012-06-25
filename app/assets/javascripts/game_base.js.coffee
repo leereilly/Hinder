@@ -67,8 +67,7 @@ class @Enemy
       Math.round(Map.tile_size * 0.8)
       Math.round(Map.tile_size * 0.6)
       Math.round(Map.tile_size * 0.4)
-      #Math.round(Map.tile_size * 0.2)
-      #Math.round(Map.tile_size * 0.1)
+      Math.round(Map.tile_size * 0.2)
 
     ]
     @canvas = Render.canvases.enemies
@@ -274,7 +273,7 @@ window.Player =
       Math.round(Map.tile_size * 0.8)
       Math.round(Map.tile_size * 0.6)
       Math.round(Map.tile_size * 0.4)
-      #Math.round(Map.tile_size * 0.2)
+      Math.round(Map.tile_size * 0.2)
       #Math.round(Map.tile_size * 0.1)
     ]
     @oldX = @x
@@ -606,7 +605,7 @@ window.Player =
     setTimeout ( ->
       Player.unlock()
       #console.log "test"
-    ), 120
+    ), 90
     return
     
   pause: ->

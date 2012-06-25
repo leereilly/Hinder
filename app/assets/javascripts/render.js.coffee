@@ -93,8 +93,9 @@ window.Render =
         @renderCanvas(@canvases.object_shadows, obj.x*Map.tile_size, obj.y*Map.tile_size,@special_block_shadow_width,@special_block_shadow_height, obj.shadow)
 
     if obj.type == "player"
-      if obj.movecount < Map.tile_size * 0.75
-        @clearCanvas(obj.canvas, obj.oldX*Map.tile_size, obj.oldY*Map.tile_size, Map.tile_size, Map.tile_size)
+      @clearCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size)
+      #if obj.movecount < Map.tile_size * 0.75
+      @clearCanvas(obj.canvas, obj.oldX*Map.tile_size, obj.oldY*Map.tile_size, Map.tile_size, Map.tile_size)
       if Player.dir == "hidden"
         @clearCanvas(obj.canvas, obj.x*Map.tile_size, obj.y*Map.tile_size, Map.tile_size, Map.tile_size)
       if Player.dir == "right"
