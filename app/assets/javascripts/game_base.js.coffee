@@ -389,7 +389,7 @@ window.Player =
     if not Map.level
       Map.level = Game.getLevel('pwd')
     if not Map.level
-      Map.level = Store.get "current level"
+      Map.level = Store.get "level"
     if not Map.level
       Game.loadNew(data.map[0])
     else 
@@ -445,7 +445,7 @@ window.Player =
   levels: []
   run_marker_check: false
   init: ->
-    @level = Store.get "levels"
+    #@level = Store.get "levels"
     Map.init()
 		
   nextLevel: ->
@@ -476,7 +476,7 @@ window.Player =
     #window.history.pushState 'page2', 'Title', '/home/index?pwd=' + mapdata.password
     Player.contact = false
 
-    Store.set "current level", mapdata.id
+    Store.set "level", mapdata.id
     Map.overlay = if mapdata.overlay then mapdata.overlay else "shadow_overlay.png"
     Map.floor = if mapdata.floor then mapdata.floor else "shadow_map.png"
 
