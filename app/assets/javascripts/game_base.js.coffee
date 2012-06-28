@@ -290,7 +290,6 @@ window.Player =
   move: (dir) ->
     Player.locked = true
     @fast_animate = false
-    jQuery(".bubble").fadeOut("fast")
     jQuery(".notice").fadeOut("fast")
     return false if @contact == true
     @dir = dir
@@ -598,6 +597,7 @@ window.Player =
     @step++
 
     if Game.speech && @step == Game.speech.step
+      jQuery(".bubble").html("")
       Game.show_bubble(Game.speech)
 
     setTimeout ( ->
@@ -633,15 +633,18 @@ window.Player =
     return
 
   show_bubble: (notice) ->
-    jQuery(".bubble").css 'left', notice.x
-    jQuery(".bubble").css 'top', notice.y
+    jQuery(".bubble").css 'left', notice.x * Map.tile_size
+    jQuery(".bubble").css 'top', notice.y * Map.tile_size
     jQuery(".bubble").html(jQuery(".bubble").html() + notice.text)
     jQuery(".bubble").fadeIn("fast")
+    setTimeout ( ->
+      jQuery(".bubble").fadeOut("slow")
+    ), 1500
     return
 
   show_notice: (notice) ->
-    jQuery(".notice").css 'left', notice.x
-    jQuery(".notice").css 'top', notice.y
+    jQuery(".notice").css 'left', notice.x * Map.tile_size
+    jQuery(".notice").css 'top', notice.y * Map.tile_size
     jQuery(".notice").html(jQuery(".notice").html() + notice.text)
     jQuery(".notice").fadeIn("fast")
     return
