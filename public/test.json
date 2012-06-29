@@ -10,6 +10,11 @@
                 "y":    4,
                 "text": "Come on!"
             },
+            "note":         {
+                "x":    2,
+                "y":    2,
+                "text": " "
+            },
             "floor":        "shadow_map_start1.png",
             "overlay":      "",
             "exit": {
