@@ -637,8 +637,8 @@
             "name":         "Detta är bara ett test",
             "floor":        "shadow_map_me19.png",
             "note":         {
-                "x":    400,
-                "y":    200,
+                "x":    10,
+                "y":    7,
                 "text": "The End"
             },
             "exit": {
