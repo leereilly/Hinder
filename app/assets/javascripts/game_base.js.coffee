@@ -189,6 +189,8 @@ class @Enemy
   nextToPlayer: (_distX, _distY) ->
     if (_distY == 0 && _distX < 2 && _distX > -2) || (_distX == 0 && _distY < 2 && _distY > -2)
       Player.locked = false
+      jQuery(".notice").html("")
+      jQuery(".bubble").html("")
       Map.init()
       return true
     return false
@@ -404,6 +406,12 @@ window.Player =
   block_at: (x, y) ->
     if y > 14
       y = 14
+    if y < 0
+      y = 0
+    if x > 14
+      x = 14
+    if x < 0
+      x = 0
     {type: @tiles[y][x], x: x, y: y}
     
   next_block: (x, y, dir) ->
@@ -512,7 +520,7 @@ window.Player =
           if block == 1
             Render.object {"type": "block", "typeid": block, "canvas": Render.canvases.main, "x": x, "y": y, "texture": Render.walls[Math.floor(Math.random() * Render.walls.length)].obj, "shadow": Resource.images.wall_shadow.obj}
           else
-            Render.clearCanvas(Render.canvases.shadow_overlay, (x*Map.tile_size), (y*Map.tile_size), Map.tile_size, Map.tile_size)
+            #Render.clearCanvas(Render.canvases.shadow_overlay, (x*Map.tile_size), (y*Map.tile_size), Map.tile_size, Map.tile_size)
 
           if block == 2
             Render.object {"type": "block", "typeid": block, "canvas": Render.canvases.main, "x": x, "y": y, "texture": Resource.images.block.obj, "shadow": Resource.images.block_shadow.obj}

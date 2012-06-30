@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   	before_filter :detect_device_request
 
 	def index
-		@start_note = ""
+		@start_note = "Use the arrow keys to move.<br />"
 		@canvassize = 570
 		@canvassize = 630 unless @using_ipad.blank?
 		@start_note = "Swipe to move.<br />" unless @using_iphone.blank? and @using_ipad.blank?
