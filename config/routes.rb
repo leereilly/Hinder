@@ -1,6 +1,6 @@
 Hinder::Application.routes.draw do
   #root :to => "home#index"
-  resources :highscore
+  #resources :highscore
   match '/' => 'home#index'
   match '/:level' => 'home#index'
   #resources :home
