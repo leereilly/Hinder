@@ -20,11 +20,12 @@ end
 
 group :production do
   gem 'heroku'
-  #gem 'pg'
+  gem 'pg'
+  gem 'activerecord-postgresql-adapter'
 end
 
 group :development do
-  gem 'sqlite3'
+  #gem 'sqlite3'
 end
 
 gem 'jquery-rails'
