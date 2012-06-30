@@ -21,7 +21,7 @@ end
 group :production do
   gem 'heroku'
   gem 'pg'
-  gem 'activerecord-postgresql-adapter'
+  #gem 'activerecord-postgresql-adapter'
 end
 
 group :development do
